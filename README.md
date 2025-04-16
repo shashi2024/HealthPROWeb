@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# HealthNet 🏥
+# HealthPRO 🏥
 A Comprehensive Healthcare Management System
 
 ![SmartAgri Demo](./assets/healthNet.png)
