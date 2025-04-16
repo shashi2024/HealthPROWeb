@@ -51,7 +51,7 @@ Rename the `.env.example` file to `.env` and add the following:
 ```env
 NODE_ENV=development
 PORT=5000
-MONGOURL="mongodb+srv://csse:2001@healthnet.uw1uz.mongodb.net/?retryWrites=true&w=majority&appName=HealthNet"
+MONGOURL="mongodb+srv://sashinisithara20:Y0G0H35277d7Gzw9@cluster0.xs386.mongodb.net/healthprodb?retryWrites=true&w=majority&appName=Cluster0"
 JWT_SECRET=abc123
 ```
 
