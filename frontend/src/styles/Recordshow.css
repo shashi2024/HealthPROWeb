@@ -1,0 +1,56 @@
+.recordList {
+    padding: 10px;
+    margin-right: -300px;
+   align-self: center;
+    
+}
+
+.report-card {
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+}
+
+.report-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.record-row {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 4px solid #007bff;
+    font-size: 14px;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+}
+
+.card-footer .btn {
+    flex: 1;
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.card-text {
+    font-size: 14px;
+    line-height: 1.6;
+}

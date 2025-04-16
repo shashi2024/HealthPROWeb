@@ -1,0 +1,28 @@
+/* EmergencyReport.css */
+
+/* Hide the print button when printing */
+@media print {
+  .print-button-section {
+      display: none; /* Hide print button */
+  }
+
+  /* Adjust layout for better print */
+  body {
+      font-size: 12px; /* Adjust font size for print */
+      color: black; /* Ensure text is black */
+  }
+
+  table {
+      width: 100%; /* Use full width for tables */
+      border-collapse: collapse; /* Collapse borders */
+  }
+
+  th, td {
+      border: 1px solid black; /* Define borders for cells */
+      padding: 8px; /* Add padding for cells */
+  }
+
+  th {
+      background-color: #f2f2f2; /* Light background for headers */
+  }
+}

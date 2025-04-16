@@ -1,0 +1,67 @@
+/* src/styles/MapScreen.css */
+
+body {
+  margin: 0;
+  /* Remove default margin */
+  font-family: Arial, sans-serif;
+  /* Set font family */
+}
+
+.container {
+  display: flex;
+  /* Use flexbox for layout */
+  flex-direction: column;
+  /* Arrange items in a column */
+  height: 100vh;
+  /* Full height of the viewport */
+  width: 100%;
+  /* Full width */
+  justify-content: center;
+  /* Center content vertically */
+  align-items: center;
+  /* Center content horizontally */
+  background-color: #f8f9fa;
+  /* Light gray background */
+}
+
+.loading {
+  font-size: 24px;
+  /* Larger text for loading state */
+  color: #007bff;
+  /* Bootstrap primary color */
+  margin-top: 20px;
+  /* Margin at the top */
+}
+
+.map-container {
+  height: 100%;
+  /* Full height of the parent */
+  width: 100%;
+  /* Full width of the parent */
+}
+
+.marker {
+  background-color: #ff0000;
+  /* Red marker color */
+  border-radius: 50%;
+  /* Rounded marker */
+  height: 10px;
+  /* Marker height */
+  width: 10px;
+  /* Marker width */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  /* Shadow for depth */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    /* Padding for small screens */
+  }
+
+  .loading {
+    font-size: 20px;
+    /* Smaller loading text on mobile */
+  }
+}

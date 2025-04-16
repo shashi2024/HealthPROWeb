@@ -1,0 +1,26 @@
+.second {
+    margin-left: 100px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #007bff;
+    margin-right: 40px;
+}
+
+.nav-link:hover {
+    color: #0056b3;
+    /* Change color on hover */
+}
+
+.dropdown-menu {
+    background-color: #f8f9fa;
+    /* Customize dropdown background */
+}
+
+.drop {
+    border-radius: 40px;
+}

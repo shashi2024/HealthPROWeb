@@ -1,0 +1,52 @@
+.AdminDashboard {
+    background-color: #f8f9fa; /* Light background for better contrast */
+    min-height: 100vh; /* Full height */
+  }
+  
+  .report_list {
+    padding: 20px;
+    background-color: #ffffff; /* White background for report section */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  }
+  
+  h2 {
+    font-size: 1.5rem; /* Larger font size */
+    color: #343a40; /* Dark gray color for headings */
+    margin-bottom: 20px; /* Space below heading */
+  }
+  
+  .table {
+    margin-top: 20px; /* Space above table */
+    border-collapse: collapse; /* Collapse borders */
+  }
+  
+  .table th {
+    background-color: #164d88; /* Bootstrap primary color */
+    color: white; /* White text color for headers */
+    font-weight: bold; /* Bold font for headers */
+  }
+  
+  .table td {
+    padding: 10px; /* Padding inside cells */
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1; /* Light gray background on hover */
+  }
+  
+  .no-patients {
+    font-style: italic; /* Italic text for no patients message */
+    color: #6c757d; /* Muted text color */
+  }
+  
+  .button {
+    background-color: #e11414; /* Bootstrap primary color */
+    border: none; /* Remove default border */
+  }
+  
+  .button:hover {
+    background-color: #36618f; /* Darker shade on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  

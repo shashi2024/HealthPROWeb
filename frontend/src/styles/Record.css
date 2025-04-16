@@ -1,0 +1,76 @@
+/* Main container styling */
+.addRecord {
+    background-color: #d6e5f5; /* Light background for the form */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Header styling */
+h2 {
+    color: #343a40; /* Dark text for better contrast */
+    margin-bottom: 20px; /* Space below the header */
+    font-weight: 600; /* Slightly bolder font */
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px; /* Space between form groups */
+}
+
+/* Label styling */
+.form-label {
+    font-weight: 500; /* Medium font weight */
+    color: #495057; /* Slightly lighter than the header */
+}
+
+/* Input and select styling */
+.form-control {
+    border-radius: 5px; /* Rounded input fields */
+    border: 1px solid #ced4da; /* Light gray border */
+    transition: border-color 0.2s; /* Transition for hover effect */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Light blue shadow on focus */
+}
+
+/* Button styling */
+button {
+    font-size: 16px; /* Larger font size for buttons */
+    font-weight: bold; /* Bold text */
+    padding: 10px; /* Padding for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+}
+
+/* Primary button styling */
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none; /* Remove default border */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Secondary button styling */
+.btn-secondary {
+    background-color: #6c757d; /* Bootstrap secondary color */
+    border: none; /* Remove default border */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+}
+
+/* Responsive styling for columns */
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: 15px; /* Less margin on smaller screens */
+    }
+    
+    h2 {
+        font-size: 24px; /* Smaller header font size */
+    }
+}

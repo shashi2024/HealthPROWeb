@@ -1,0 +1,14 @@
+.patient_list {
+    background-color: #79c7eb93;
+    height: 80vh;
+    width: 1150px;
+    position: absolute;
+    padding: 20px;
+    margin-top: -50px;
+
+    margin-left: -105px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: width 0.9s;
+    border-radius: 20px;
+}

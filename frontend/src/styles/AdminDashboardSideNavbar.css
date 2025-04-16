@@ -1,0 +1,76 @@
+.admin-dashboard {
+    background-color: #a6d7ee93;
+    height: 80vh;
+    position: absolute;
+    width: 280px;
+    padding: 20px;
+    top: 15;
+    left: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: width 0.3s;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.admin-dashboard h4 {
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+.admin-dashboard .nav-link {
+    color: #555;
+    width: 220px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.admin-dashboard .nav-link svg {
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.admin-dashboard .nav-link:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.admin-dashboard .nav-link.active {
+    background-color: #e6f7ff;
+    color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .admin-dashboard {
+        width: 200px;
+    }
+
+    .admin-dashboard h4 {
+        font-size: 1.5rem;
+    }
+
+    .admin-dashboard .nav-link {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-dashboard {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: none;
+    }
+
+    .admin-dashboard h4 {
+        font-size: 1.25rem;
+    }
+
+    .admin-dashboard .nav-link {
+        font-size: 0.85rem;
+    }
+}

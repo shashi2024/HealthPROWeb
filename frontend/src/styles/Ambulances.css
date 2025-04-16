@@ -1,0 +1,38 @@
+/* Ambulances.css */
+
+/* Container styling for the ambulance list page */
+.AdminDashboard {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+.ambulance_list {
+  margin-top: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Ambulance table styling */
+.ambulance-table {
+  background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ambulance-table thead {
+  background-color: #007bff;
+  color: white;
+}
+
+.ambulance-table th,
+.ambulance-table td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.ambulance-table tbody tr:hover {
+  background-color: #f1f1f1;
+}

@@ -1,0 +1,60 @@
+/* Assign.css */
+.AdminDashboard {
+    background-color: #f8f9fa; /* Light background color */
+    padding: 20px;
+  }
+  
+  .assign-ambulance {
+    background: white; /* White background for the content area */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .assign-ambulance h2 {
+    color: #333; /* Darker text for headings */
+    font-size: 1.8rem; /* Larger font size */
+    margin-bottom: 10px;
+  }
+  
+  .assign-ambulance h3 {
+    color: #555; /* Slightly lighter color for subheadings */
+    font-size: 1.5rem; /* Font size for subheadings */
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .table {
+    margin-top: 20px; /* Space between the heading and table */
+  }
+  
+  .table th {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text on header */
+    text-align: center; /* Center align text */
+  }
+  
+  .table td {
+    text-align: center; /* Center align text */
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray hover effect */
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .button-container .btn {
+    border-radius: 4px; /* Rounded corners for buttons */
+  }
+  
+  .button-container .btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    color: white; /* White text on hover */
+  }
+  
+  
