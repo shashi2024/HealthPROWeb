@@ -247,6 +247,44 @@ export const getDoctorByName = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
+
+  export const getPandemicAlerts = async (req, res) => {
+  try {
+    const symptomThreshold = 3; // Customize: number of cases to trigger alert
+
+    // Group appointments by address and count how many patients reported from each
+    const alerts = await Appointment.aggregate([
+      {
+        $group: {
+          _id: "$address",
+          count: { $sum: 1 },
+          symptoms: { $push: "$symptoms" },
+          patients: { $push: "$name" },
+        },
+      },
+      {
+        $match: {
+          count: { $gte: symptomThreshold },
+        },
+      },
+      {
+        $project: {
+          location: "$_id",
+          count: 1,
+          symptoms: 1,
+          patients: 1,
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.status(200).json(alerts);
+  } catch (error) {
+    console.error("Error generating pandemic alerts:", error.message);
+    res.status(500).json({ message: "Server Error: Unable to generate alerts" });
+  }
+};
+
   
 
 

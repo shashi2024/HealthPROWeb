@@ -56,6 +56,11 @@ const AdminDashboardSideNavbar = () => {
             <FaFileMedical /> Ambulances
           </Nav.Link>
         </LinkContainer>
+        <LinkContainer to="/managementdashboard/pandemicAlerts">
+          <Nav.Link>
+            <FaFileMedical /> Alerts
+          </Nav.Link>
+        </LinkContainer>
       </Nav>
     </div>
   );
