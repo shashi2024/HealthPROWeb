@@ -167,6 +167,17 @@
     padding: 10px;
   }
 
+  .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: grey; /* default color */
+  }
+  
+  .icon-btn.important {
+    color: yellow; /* highlighted color */
+  }
+  
   
   
   

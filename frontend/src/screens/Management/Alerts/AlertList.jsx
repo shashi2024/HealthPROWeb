@@ -42,7 +42,14 @@ const AlertList = () => {
     setCompletedAlerts((prev) => ({ ...prev, [id]: true }));
   };
 
-  const handleMarkImportant = (id) => {
+  const handleMarkImportant1 = (id) => {
+    setImportantAlerts((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const handleMarkImportant2 = (id) => {
     setImportantAlerts((prev) => ({
       ...prev,
       [id]: !prev[id],
@@ -54,6 +61,31 @@ const AlertList = () => {
       ...prev,
       [id]: !prev[id],
     }));
+  };
+
+  const handleDeleteGroup = (key) => {
+    const currentTime = Date.now();
+
+    // Check if ALL alerts in that group are older than 1 hour
+    const alertsInGroup = alerts.filter((alert) => {
+      const groupKey = `${alert.location} (${alert.symptoms.join(", ")})`;
+      return groupKey === key;
+    });
+
+    const canDelete = alertsInGroup.every((alert) => {
+      const alertTime = new Date(alert.timestamp).getTime();
+      return currentTime - alertTime >= 3600 * 1000; // 1 hour = 3600 sec * 1000 ms
+    });
+
+    if (canDelete) {
+      const updatedAlerts = alerts.filter((alert) => {
+        const groupKey = `${alert.location} (${alert.symptoms.join(", ")})`;
+        return groupKey !== key;
+      });
+      setAlerts(updatedAlerts);
+    } else {
+      alert("You can only delete alerts that are older than 1 hour.");
+    }
   };
 
   return (
@@ -69,20 +101,31 @@ const AlertList = () => {
                 }`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleMarkImportant(firstAlert._id);
+                  handleMarkImportant1(firstAlert._id);
                 }}
               >
                 ♥
               </button>
               <button
-  className={`icon-btn ${importantAlerts[alert.id] ? "important" : ""}`}
-  onClick={(e) => {
-    e.stopPropagation();
-    toggleImportant(alert.id); // This should toggle the state
-  }}
->
-  <FaBookmark size={20} />
-</button>
+                className={`icon-btn ${
+                  importantAlerts[firstAlert._id] ? "important" : ""
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleMarkImportant2(firstAlert._id);
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M2 2v13.5l6-3.5 6 3.5V2z" />
+                </svg>
+              </button>
+
               <span className="location">{firstAlert.location}</span>
               <span className="symptoms">
                 ({firstAlert.symptoms.join(", ")})
@@ -102,7 +145,7 @@ const AlertList = () => {
                       <th>Age Group</th>
                       <th>Gender</th>
                       <th>Hospital</th>
-                      <th>Status</th>
+                      <th>Phone Number</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -112,25 +155,17 @@ const AlertList = () => {
                         <td>{alert.ageGroup}</td>
                         <td>{alert.gender}</td>
                         <td>{alert.hospital}</td>
-                        <td>
-                          {completedAlerts[alert._id] ? (
-                            <span className="completed">Completed</span>
-                          ) : (
-                            <button
-                              className="complete-btn"
-                              onClick={() => handleMarkCompleted(alert._id)}
-                            >
-                              Mark as Completed
-                            </button>
-                          )}
-                        </td>
+                        <td>{alert.contactNumber}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
                 <div className="view-details">
-                  <button onClick={() => navigate(`/alerts/${firstAlert._id}`)}>
-                    View Full Details
+                  <button
+                    onClick={() => handleDeleteGroup(key)}
+                    className="delete-btn"
+                  >
+                    Delete Alerts
                   </button>
                 </div>
               </div>

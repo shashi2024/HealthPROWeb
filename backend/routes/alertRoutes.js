@@ -2,7 +2,8 @@ import express from 'express';
 import {
   generateAlert,
   getAllAlerts,
-  getAlertById
+  getAlertById,
+  generateAndSaveAlerts
 } from '../controllers/alertController.js';
 
 import { getPandemicAlerts } from '../controllers/appointmentController.js';
@@ -14,6 +15,8 @@ router.get('/', getAllAlerts);              // /api/alerts/
 router.get('/:id', getAlertById);           // /api/alerts/:id
 
 router.get('/pandemic', getPandemicAlerts); // 👈 route: /api/alerts/pandemic
+
+router.post("/save", generateAndSaveAlerts); // save generated alerts
 
 
 export default router;
