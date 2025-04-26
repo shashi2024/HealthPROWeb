@@ -15,6 +15,8 @@ import paymentRoutes from "./routes/paymentRoutes.js";
 
 import RecordRoutes from "./routes/RecordRoutes.js";
 
+import alertRoutes from "./routes/alertRoutes.js";
+
 dotenv.config();
 
 const port = process.env.PORT || 5000;
@@ -35,6 +37,7 @@ app.use("/api/appointments", appointmentRoutes);
 app.use("/api/emergency-requests", emergencyRequestRoutes); // Use emergency request routes
 app.use("/api/ambulances", ambulanceRoutes);
 app.use("/api/payments", paymentRoutes);
+app.use("/api/alerts", alertRoutes);
 app.use("/api", RecordRoutes);
 
 app.get("/", (req, res) => {

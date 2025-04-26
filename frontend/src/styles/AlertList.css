@@ -1,0 +1,261 @@
+/* .alert-container {
+    padding: 20px;
+  }
+  
+  .alert-group {
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .alert-header {
+    background-color: #008080;
+    color: white;
+    font-weight: bold;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .alert-table-container {
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+  }
+  
+  .alert-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .alert-table th {
+    background-color: #005a66;
+    color: white;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .alert-table td {
+    padding: 10px;
+    border-top: 1px solid #bbb;
+  } */
+
+
+
+
+
+
+
+
+
+
+  .alert-list {
+    margin: 20px;
+  }
+  
+  .alert-header {
+    border: 3px solid ;
+    border-color: #008b8b;
+    background-color: #ffffff;
+    color: #008b8b;
+    padding: 1px 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  .alert-header button {
+    width: 20px;
+    height: 20px;
+    /* margin : 2px 2px; */
+  }
+  
+  .icon-btn {
+    all: unset;
+    /*ResetsALLdefaultstyles*/cursor: pointer;
+    color: #ccc;
+    font-size: 35px;
+    margin-right: 10px;
+    padding: 8px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -ms-transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+}
+  
+  .icon-btn.important {
+    color: rgb(255, 234, 0); /* or any color you want when marked important */
+  }
+  
+  
+  
+  .location {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .symptoms {
+    font-weight: bold;
+  }
+  
+  .time {
+    margin-left: auto;
+    padding-right: 10px;
+  }
+  
+  .dropdown {
+    font-size: 16px;
+  }
+  
+  .alert-details {
+    background-color: #e0e0e0;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  
+  .alert-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+  }
+  
+  .alert-details th,
+  .alert-details td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .complete-btn {
+    padding: 6px 12px;
+    background-color: #004d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .completed {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .view-details button {
+    background-color: #003840;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  /* .alert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .alert-card {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .alert-header {
+    background-color: #008b8b;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+  
+  .icons span {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  .location-info {
+    font-size: 16px;
+  }
+  
+  .symptoms {
+    font-weight: normal;
+  }
+  
+  .timestamp {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .alert-details {
+    background-color: #e0e0e0;
+    padding: 15px 20px;
+  }
+  
+  .alert-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+  }
+  
+  .alert-table th {
+    background-color: #004b5a;
+    color: white;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .alert-table td {
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .details-button {
+    background-color: #002f3f;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: auto;
+    display: block;
+  }
+   */
