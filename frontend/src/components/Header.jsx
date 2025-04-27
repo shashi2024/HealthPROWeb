@@ -36,7 +36,7 @@ const Header = () => {
             <Navbar.Brand className="header_title">
               <img src={logo} className="logo" alt="logo" />{" "}
               <span style={{ fontWeight: "bolder", fontSize: "21px" }}>H</span>
-              ealthNet
+              ealthPro
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -1,0 +1,17 @@
+.custom-table thead th {
+  background-color: #1c9ea0;
+  color: white;
+}
+
+.form1{
+    background-color: #62e1e4;
+  color: white;
+}
+
+.sub_btn{
+    background-color: #1c9ea0 !important;
+}
+
+.sub_btn:hover{
+    background-color: #167d7f !important;
+}
