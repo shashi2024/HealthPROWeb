@@ -20,14 +20,14 @@ body {
   /* Center content vertically */
   align-items: center;
   /* Center content horizontally */
-  background-color: #f8f9fa;
+  background-color: #f8fafa;
   /* Light gray background */
 }
 
 .loading {
   font-size: 24px;
   /* Larger text for loading state */
-  color: #007bff;
+  color: #00eeff;
   /* Bootstrap primary color */
   margin-top: 20px;
   /* Margin at the top */

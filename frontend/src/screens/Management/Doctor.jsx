@@ -72,7 +72,7 @@ function Doctor() {
             {/* Added class name patient_list */}
             <div className="d-flex justify-content-between align-items-center mb-4">
               {/* Left-side button */}
-              <Link to={"/adddoctors"} className="btn btn-primary">
+              <Link to={"/adddoctors"} className="btn btn-primary add_btn">
                 Add Doctor
               </Link>
 
@@ -90,7 +90,7 @@ function Doctor() {
                 </InputGroup.Text>
               </InputGroup>
             </div>
-            <Table striped bordered hover>
+            <Table striped bordered hover className="form">
               <thead>
                 <tr>
                   <th>Doctor Name</th>

@@ -1,6 +1,6 @@
 /* Assign.css */
 .AdminDashboard {
-    background-color: #f8f9fa; /* Light background color */
+    background-color: #f8fafa; /* Light background color */
     padding: 20px;
   }
   
@@ -30,7 +30,7 @@
   }
   
   .table th {
-    background-color: #007bff; /* Bootstrap primary color */
+    background-color: #00f2ff; /* Bootstrap primary color */
     color: white; /* White text on header */
     text-align: center; /* Center align text */
   }
@@ -53,7 +53,7 @@
   }
   
   .button-container .btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #00adb3; /* Darker blue on hover */
     color: white; /* White text on hover */
   }
   

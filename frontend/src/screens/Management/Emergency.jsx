@@ -62,7 +62,7 @@ const Emergency = () => {
             ) : emergencyRequests.length === 0 ? (
               <p>No emergency requests found</p>
             ) : (
-              <Table striped bordered hover className="emergency-table">
+              <Table striped bordered hover className="emergency-table form">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -88,6 +88,7 @@ const Emergency = () => {
                       <td>
                         <Button
                           variant="primary"
+                          className="assign-ambulance-button"
                           onClick={() => handleAssignAmbulance(request._id)}
                         >
                           Assign Ambulance

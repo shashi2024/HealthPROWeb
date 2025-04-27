@@ -2,6 +2,8 @@
     padding: 3px 10px;
     font-size: 15px;
     transition: background-color 0.3s, color 0.3s;
+    background-color: #008385 !important;
+    color: white !important;
 }
 
 .table-modern {
@@ -10,7 +12,15 @@
 }
 
 .receiptBTN:hover {
-    background-color: #0056b3;
+    background-color: #7bedf8;
     /* Darker blue on hover */
-    color: white;
+    color: rgb(182, 182, 182);
+}
+
+.form thead th{
+    background-color: #22bfc2;
+}
+
+.heading{
+    background-color: #167d7f !important;
 }

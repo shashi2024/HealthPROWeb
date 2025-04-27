@@ -26,3 +26,16 @@
       background-color: #f2f2f2; /* Light background for headers */
   }
 }
+
+.form thead th{
+    background-color: #22bfc2;
+}
+
+.print-button-section{
+    background-color: #15a3a5 !important;
+}
+
+.print-button-section:hover{
+    background-color: #064a4b !important;
+}
+

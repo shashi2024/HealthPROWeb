@@ -56,7 +56,7 @@ const RecommendationDoctors = () => {
             whiteSpace: "nowrap", // Prevent wrapping to the next line
             textAlign: "center", // Center text
             width: "fit-content", // Button adjusts to the content size
-            backgroundColor: "#00008B", // Custom background color
+            backgroundColor: "#1faeb1", // Custom background color
             color: "#fff", // White text color for contrast
             border: "none", // Remove border if needed
             borderRadius: "5px", // Optional: Rounded corners
@@ -73,7 +73,7 @@ const RecommendationDoctors = () => {
             textAlign: "center",
             marginLeft: "10px", // Space between buttons
             width: "fit-content", // Fit content width
-            backgroundColor: "#0F52BA", // Light background color
+            backgroundColor: "#198d90", // Light background color
             color: "white", // Set text color to white
             border: "none", // Remove border
           }}
@@ -89,7 +89,7 @@ const RecommendationDoctors = () => {
             textAlign: "center",
             marginLeft: "10px", // Space between buttons
             width: "fit-content", // Fit content width
-            backgroundColor: "#0096FF", // #6495EDLight background color
+            backgroundColor: "#005759", // #6495EDLight background color
             color: "white", // Set text color to white
             border: "none", // Remove border
           }}
@@ -145,7 +145,7 @@ const RecommendationDoctors = () => {
           type="submit"
           style={{
             padding: "10px 15px",
-            backgroundColor: "#5D3FD3",
+            backgroundColor: "#198d90",
             color: "#fff",
             border: "none",
             borderRadius: "5px",
@@ -173,7 +173,7 @@ const RecommendationDoctors = () => {
               <div
                 key={doctor._id}
                 style={{
-                  backgroundColor: "#0096FF",
+                  backgroundColor: "#62e1e4",
                   border: "1px solid #ccc",
                   borderRadius: "8px",
                   padding: "15px",

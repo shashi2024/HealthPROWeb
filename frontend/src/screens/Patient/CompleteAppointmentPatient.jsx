@@ -4,6 +4,8 @@ import axios from "axios";
 import { Table, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { InputGroup } from "react-bootstrap"; // Import InputGroup for adding the search icon
+import "../../styles/Appointments.css"; // Import your CSS file
+
 const CompleteAppointmentPatient = () => {
   const [completedAppointments, setCompletedAppointments] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -49,7 +51,7 @@ const CompleteAppointmentPatient = () => {
             whiteSpace: "nowrap", // Prevent wrapping to the next line
             textAlign: "center", // Center text
             width: "fit-content", // Button adjusts to the content size
-            backgroundColor: "#00008B", // Custom background color
+            backgroundColor: "#167d7f", // Custom background color
             color: "#fff", // White text color for contrast
             border: "none", // Remove border if needed
             borderRadius: "5px", // Optional: Rounded corners
@@ -65,7 +67,7 @@ const CompleteAppointmentPatient = () => {
             textAlign: "center",
             marginLeft: "10px", // Space between buttons
             width: "fit-content", // Fit content width
-            backgroundColor: "#0F52BA", // Light background color
+            backgroundColor: "#1c9ea0", // Light background color
             color: "white", // Set text color to white
             border: "none", // Remove border
           }}
@@ -81,7 +83,7 @@ const CompleteAppointmentPatient = () => {
             textAlign: "center",
             marginLeft: "10px", // Space between buttons
             width: "fit-content", // Fit content width
-            backgroundColor: "#0096FF", // Light background color
+            backgroundColor: "#22bfc2", // Light background color
             color: "white", // Set text color to white
             border: "none", // Remove border
           }}
@@ -107,8 +109,8 @@ const CompleteAppointmentPatient = () => {
         striped
         bordered
         hover
-        className="text-center"
-        style={{ backgroundColor: "#e6f7ff" }} // Light blue background for the table
+        className="text-center custom-table"
+        style={{ backgroundColor: "#c6f4f5" }} // Light blue background for the table
       >
         <thead>
           <tr>

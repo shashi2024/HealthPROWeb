@@ -92,7 +92,7 @@ const EmergencyReport = () => {
           <p>Error: {error}</p>
         ) : (
           <>
-            <Table striped bordered hover>
+            <Table striped bordered hover className="form">
               <thead>
                 <tr>
                   <th>Urgency Level</th>
@@ -157,7 +157,7 @@ const EmergencyReport = () => {
 
             {/* Print Button at the bottom of the page */}
             <div className="print-button-section" style={{ textAlign: 'center', marginTop: '20px' }}>
-              <Button variant="primary" onClick={handlePrint}>
+              <Button variant="primary" onClick={handlePrint} className="print-button-section">
                 Print
               </Button>
             </div>

@@ -72,7 +72,7 @@ const EditDoctor = () => {
             {/* Centering form and controlling width */}
             <Row className="justify-content-center w-100">
               <Col md={8} lg={6}> {/* Limit the width to 6/12 on medium screens */}
-                <Form className="form-reduce-font" onSubmit={handleFinish}>
+                <Form className="form-reduce-font form" onSubmit={handleFinish}>
                   <Row>
                     <Col md={6}>
                       <Form.Group className="mb-3" controlId="doctorname">
@@ -196,7 +196,7 @@ const EditDoctor = () => {
                     />
                   </Form.Group>
 
-                  <Button variant="primary" type="submit" className="w-100"> {/* Full-width button */}
+                  <Button variant="primary" type="submit" className="w-100 add_btn"> {/* Full-width button */}
                     Update Doctor
                   </Button>
                 </Form>

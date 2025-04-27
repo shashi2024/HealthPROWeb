@@ -5,6 +5,7 @@ import "../../styles/Payments.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../styles/Payments.css";
 
 const Payments = ({ setTotalPayments, setTotalAmount }) => {
   const [payments, setPayments] = useState([]);
@@ -69,7 +70,7 @@ const Payments = ({ setTotalPayments, setTotalAmount }) => {
         <Col md={9}>
           <div className="patient_list">
             <h2>All Payments</h2>
-            <Table striped bordered hover responsive="sm" className="mt-4">
+            <Table striped bordered hover responsive="sm" className="mt-4 form">
               <thead>
                 <tr>
                   <th>#</th>
