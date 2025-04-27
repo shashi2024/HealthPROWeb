@@ -14,12 +14,23 @@ body {
 
 .heading_title {
     text-align: left;
-    margin-top: -30px;
-    font-family: "Poppins", serif;
+    margin-top: -25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 60px;
-    color: #01346b;
+    font-size: 80px;
+    color: #167d7f;
+    margin-left: -10px;
+}
+
+.heading_title2 {
+    text-align: left;
+    margin-top: -1px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 40px;
+    color: #167d7f;
     margin-left: -10px;
 }
 
@@ -58,8 +69,8 @@ body {
 }
 
 .hero-card .btn-primary {
-    background-color: #0069d9;
-    border-color: #0069d9;
+    background-color: #1c9ea0;
+    border-color: #1c9ea0;
 }
 
 .hero-card .btn-secondary {
@@ -95,7 +106,7 @@ ul {
 
 ul li {
     margin-bottom: 10px;
-    color: #007bff;
+    color: #1c9ea0;
     font-size: 1.1rem;
 }
 
@@ -105,10 +116,23 @@ section img {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.section2_img{
+    margin-top: 80px;
+}
+
 .learn_more {
     margin-left: 10px;
     width: 200px;
     height: 50px;
+    background-color: #167d7f !important;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.learn_more:hover {
+    background-color: #22bfc2 !important;
 }
 
 .words {
@@ -118,7 +142,7 @@ section img {
 /* Health Care Solutions Section */
 .card {
     border: none;
-    background-color: #bed6eedc;
+    background-color: #83e8ea;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 18px;
     padding: 13px;
@@ -147,11 +171,13 @@ section img {
 /* section3 */
 
 .section3 {
+    background-color: #167d7f !important;
     padding: 30px;
 }
 
 .sec3image {
     border-radius: 20px;
+    margin-top: 60px;
 }
 
 .sec3_title {
@@ -161,7 +187,7 @@ section img {
 
 .sec3_desc {
     text-align: left;
-    color: #ccc;
+    color: #a4faff;
 }
 
 .icon-list {
@@ -202,7 +228,7 @@ section img {
 }
 
 .cardbox h4 {
-    color: #007bff;
+    color: #1faeb1;
 }
 
 .cardbox p {
@@ -249,6 +275,6 @@ footer .form-control {
 }
 
 footer .btn-primary {
-    background-color: #007bff;
+    background-color: #1faeb1;
     border: none;
 }

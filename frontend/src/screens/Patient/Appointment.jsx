@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Col, Container, Row, Form, Button } from "react-bootstrap"; // Bootstrap components
 import { useNavigate } from "react-router-dom"; // For navigation
+import "../../styles/Appointments.css"; // Custom styles
 
 const Appointment = () => {
   const [formData, setFormData] = useState({
@@ -123,7 +124,7 @@ const Appointment = () => {
   
   return (
     <Container fluid className="AdminDashboard">
-      <Row className="justify-content-center mb-4">
+      <Row className="justify-content-center mb-4 ">
         {" "}
         {/* Center the buttons */}
         <Col md="auto">
@@ -134,7 +135,7 @@ const Appointment = () => {
               whiteSpace: "nowrap", // Prevent wrapping to the next line
               textAlign: "center", // Center text
               width: "fit-content", // Button adjusts to the content size
-              backgroundColor: "#00008B", // Custom background color
+              backgroundColor: "#24cfd3", // Custom background color
               color: "#fff", // White text color for contrast
               border: "none", // Remove border if needed
               borderRadius: "5px", // Optional: Rounded corners
@@ -152,7 +153,7 @@ const Appointment = () => {
               textAlign: "center",
               marginLeft: "10px", // Space between buttons
               width: "fit-content", // Fit content width
-              backgroundColor: "#0F52BA", // Light background color
+              backgroundColor: "#1c9ea0", // Light background color
               color: "white", // Set text color to white
               border: "none", // Remove border
             }}
@@ -169,7 +170,7 @@ const Appointment = () => {
               textAlign: "center",
               marginLeft: "10px", // Space between buttons
               width: "fit-content", // Fit content width
-              backgroundColor: "#0096FF", // #6495EDLight background color
+              backgroundColor: "#037c80", // #6495EDLight background color
               color: "white", // Set text color to white
               border: "none", // Remove border
             }}
@@ -183,10 +184,12 @@ const Appointment = () => {
         <Col md={6} lg={5}>
           {" "}
           {/* Reduced form size */}
-          <div className="form-container p-4">
+          <div className="form-container p-4 ">
             <h1 className="mb-2 text-center">Book An Appointment</h1>
 
-            <Form onSubmit={handleSubmit}>
+            <Form 
+            className="form1"
+            onSubmit={handleSubmit}>
               <Row>
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="name">
@@ -374,7 +377,7 @@ const Appointment = () => {
                   </Col>
               </Row>
 
-              <Button variant="primary" type="submit" className="w-100">
+              <Button variant="primary" type="submit" className="w-100 sub_btn">
                 Submit Appointment
               </Button>
             </Form>

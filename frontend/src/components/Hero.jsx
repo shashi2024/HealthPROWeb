@@ -61,8 +61,11 @@ const Hero = () => {
             {/* Left side: Text and Stats */}
             <Col md={6} className="text-center text-md-start">
               <h1 className="heading_title">
-                Good Health Is The Root Of All Happiness
+              Healthy Living Happy Life 
               </h1>
+              <h2 className="heading_title2">
+              Empower Your Wellness with Smart Health Management
+              </h2>
               <Row className="mt-4 count_section text-center text-md-start">
                 <Col>
                   <h3 className="count">123</h3>
@@ -364,7 +367,7 @@ const Hero = () => {
             position: "fixed",
             bottom: "30px",
             right: "30px",
-            backgroundColor: "#007bff",
+            backgroundColor: "#1c9ea0",
             color: "#fff",
             border: "none",
             borderRadius: "50%",
@@ -379,10 +382,10 @@ const Hero = () => {
             transition: "background-color 0.3s",
           }}
           onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "#0056b3")
+            (e.currentTarget.style.backgroundColor = "#198d90")
           }
           onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "#007bff")
+            (e.currentTarget.style.backgroundColor = "#1faeb1")
           }
         >
           ↑

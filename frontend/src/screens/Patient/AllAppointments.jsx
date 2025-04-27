@@ -10,6 +10,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "../../styles/Appointments.css"
 
 const AllAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -64,7 +65,7 @@ const AllAppointments = () => {
             whiteSpace: "nowrap", // Prevent wrapping to the next line
             textAlign: "center", // Center text
             width: "fit-content", // Button adjusts to the content size
-            backgroundColor: "#00008B", // Custom background color
+            backgroundColor: "#015e61", // Custom background color
             color: "#fff", // White text color for contrast
             border: "none", // Remove border if needed
             borderRadius: "5px", // Optional: Rounded corners
@@ -81,7 +82,7 @@ const AllAppointments = () => {
             textAlign: "center",
             marginLeft: "10px", // Space between buttons
             width: "fit-content", // Fit content width
-            backgroundColor: "#0F52BA", // Light background color
+            backgroundColor: "#198d90", // Light background color
             color: "white", // Set text color to white
             border: "none", // Remove border
           }}
@@ -97,7 +98,7 @@ const AllAppointments = () => {
             textAlign: "center",
             marginLeft: "10px", // Space between buttons
             width: "fit-content", // Fit content width
-            backgroundColor: "#0096FF", // Light background color
+            backgroundColor: "#1c9ea0", // Light background color
             color: "white", // Set text color to white
             border: "none", // Remove border
           }}
@@ -123,8 +124,8 @@ const AllAppointments = () => {
         bordered
         hover
         responsive
-        className="text-center"
-        style={{ backgroundColor: "#e6f7ff" }} // Light blue background for the table
+        className="text-center custom-table"
+        style={{ backgroundColor: "#c6f4f5" }} // Light blue background for the table
       >
         <thead>
           <tr>
@@ -162,7 +163,7 @@ const AllAppointments = () => {
         <Col md={6}>
           <Card
             className="h-100"
-            style={{ backgroundColor: "#f9f9f9", padding: "20px" }}
+            style={{ backgroundColor: "#40dbde", padding: "20px" }}
           >
             <Card.Body>
               <Card.Text>
@@ -176,7 +177,7 @@ const AllAppointments = () => {
         <Col md={6}>
           <Card
             className="h-100"
-            style={{ backgroundColor: "#f9f9f9", padding: "20px" }}
+            style={{ backgroundColor: "#40dbde", padding: "20px" }}
           >
             <Card.Body>
               <Card.Text>
