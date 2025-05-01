@@ -1,11 +1,19 @@
+/* .out_table{
+    background-color: #62e1e4;
+} */
+/* 
+.form {
+    background-color: #83e8ea;
+} */
+
 .form thead th{
     background-color: #22bfc2;
 }
 
-.add_btn{
+.complete_btn{
     background-color: #167d7f !important;
 }
 
-.add_btn:hover{
+.complete_btn:hover{
     background-color: #0f5c5d !important;
 }

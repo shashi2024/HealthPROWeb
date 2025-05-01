@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Container, Row, Col } from 'react-bootstrap'; // Import Bootstrap components
 import AdminDashboardSideNavbar from "../../../components/AdminDashboardSideNavbar"; // Import side navbar
+import "../../../styles/AdminAppointment.css"; 
 
 const CompletedAppointments = () => {
   const [completedAppointments, setCompletedAppointments] = useState([]);
@@ -29,7 +30,7 @@ const CompletedAppointments = () => {
         <Col md={9}>
           <div className="patient_list"> {/* Similar to patient_list class for consistency */} 
             <h2 className="mb-4">Completed Appointments</h2> {/* Heading for the page */} 
-            <Table striped bordered hover responsive className="text-center"> {/* Responsive table with hover effect */} 
+            <Table striped bordered hover responsive className="text-center form"> {/* Responsive table with hover effect */} 
               <thead>
                 <tr>
                   <th>Patient Name</th>

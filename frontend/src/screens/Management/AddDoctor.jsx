@@ -69,7 +69,7 @@ const AddDoctor = () => {
             {/* Centering form and controlling width */}
             <Row className="justify-content-center">
               <Col md={10}> {/* Set the width of the form */}
-                <Form className="form-reduce-font" onSubmit={handleFinish}>
+                <Form className="form-reduce-font form" onSubmit={handleFinish}>
                   <Row> {/* Grouping form fields horizontally */}
                     <Col md={6}>
                       <Form.Group className="mb-3" controlId="doctorname">
@@ -193,7 +193,7 @@ const AddDoctor = () => {
                     </Col>
                   </Row>
 
-                  <Button variant="primary" type="submit" className="mt-3">
+                  <Button variant="primary" type="submit" className="mt-3 add_btn">
                     Add Doctor
                   </Button>
                 </Form>

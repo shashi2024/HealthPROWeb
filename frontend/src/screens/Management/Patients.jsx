@@ -54,9 +54,9 @@ const Patients = () => {
           <AdminDashboardSideNavbar /> {/* Add Side Navbar here */}
         </Col>
         <Col md={9}>
-          <div className="patient_list">
+          <div className="patient_list ">
             <h2>All Patients</h2>
-            <Table striped bordered hover responsive="sm" className="mt-4">
+            <Table striped bordered hover responsive="sm" className="mt-4 form">
               <thead>
                 <tr>
                   <th>#</th>
@@ -77,7 +77,7 @@ const Patients = () => {
                       <Button
                         variant="primary"
                         size="sm"
-                        className="me-2"
+                        className="me-2 update-btn"
                         onClick={() => handleUpdate(patient._id)}
                       >
                         Update

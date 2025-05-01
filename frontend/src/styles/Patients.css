@@ -1,5 +1,5 @@
 .patient_list {
-    background-color: #79c7eb93;
+    background-color: #cafcfc;
     height: 80vh;
     width: 1150px;
     position: absolute;
@@ -12,3 +12,15 @@
     transition: width 0.9s;
     border-radius: 20px;
 }
+
+.form {
+    background-color: #83e8ea;
+}
+
+.form thead th{
+    background-color: #22bfc2;
+}
+
+/* .update-btn{
+    background-color: #167d7f !important;
+} */

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "../../../styles/AlertList.css";
 import { FaBookmark } from "react-icons/fa";
 
+
+
 const AlertList = () => {
   const [alerts, setAlerts] = useState([]);
   const [openSections, setOpenSections] = useState({});

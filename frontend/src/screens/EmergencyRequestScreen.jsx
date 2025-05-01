@@ -183,7 +183,7 @@ const EmergencyRequestScreen = () => {
           </button>
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary add_btn">
           Submit
         </button>
       </form>

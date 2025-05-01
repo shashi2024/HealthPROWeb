@@ -49,11 +49,11 @@ const MyPaymentsScreen = () => {
       <Row className="justify-content-center">
         <Col md={10}>
           <Card className="shadow-sm border-light">
-            <Card.Header as="h5" className="bg-primary text-white text-center">
+            <Card.Header as="h5" className="bg-primary text-white text-center heading">
               My Payments
             </Card.Header>
             <Card.Body>
-              <Table striped bordered hover responsive className="table-modern">
+              <Table striped bordered hover responsive className="table-modern form">
                 <thead>
                   <tr>
                     <th>Amount (LKR)</th>

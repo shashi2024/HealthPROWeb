@@ -38,7 +38,7 @@ const Reports = () => {
           <div className="report_list">
             <h2>Patients</h2>
             {/* Display patients in a table */}
-            <Table>
+            <Table className="form">
               <thead>
                 <tr>
                   <th>#</th>

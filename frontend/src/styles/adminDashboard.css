@@ -1,5 +1,5 @@
 .dashboard {
-    background-color: #f4f7fa;
+    background-color: #c6f4f5;
     height: 100vh;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .sidebar ul li:hover {
-    background-color: #e7f1ff;
+    background-color: #62e1e4;
 }
 
 .main-content {

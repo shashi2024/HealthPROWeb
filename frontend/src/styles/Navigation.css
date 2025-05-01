@@ -7,12 +7,12 @@
 }
 
 .nav-link {
-    color: #007bff;
+    color: #00d9ff;
     margin-right: 40px;
 }
 
 .nav-link:hover {
-    color: #0056b3;
+    color: #008fb3;
     /* Change color on hover */
 }
 

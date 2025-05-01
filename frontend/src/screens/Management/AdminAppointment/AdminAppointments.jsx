@@ -14,6 +14,7 @@ import {
 } from "react-bootstrap"; // Import Bootstrap components
 
 import AdminDashboardSideNavbar from "../../../components/AdminDashboardSideNavbar"; // Import side navbar
+import "../../../styles/AdminAppointment.css"; // Import your CSS file
 
 const AdminAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -71,17 +72,17 @@ const AdminAppointments = () => {
           <AdminDashboardSideNavbar /> {/* Side navbar component */}
         </Col>
         <Col md={9}>
-          <div className="patient_list">
+          <div className="patient_list out_table">
             {" "}
             {/* Similar to patient_list class in Doctors.jsx */}
             <div className="d-flex justify-content-between align-items-center mb-4">
               {/* Left-side button */}
-              <Link to={"/getDeletedAppointments"} className="btn btn-primary">
+              <Link to={"/getDeletedAppointments"} className="btn btn-primary complete_btn">
                 Completed Appointment
               </Link>
 
               {/* Right-side search bar */}
-              <InputGroup className="mb-3" style={{ width: "500px" }}>
+              <InputGroup className="mb-3" style={{ width: "500px"}}>
                 {" "}
                 {/* Increased width to 500px */}
                 <FormControl
@@ -94,7 +95,7 @@ const AdminAppointments = () => {
                 </InputGroup.Text>
               </InputGroup>
             </div>
-            <Table striped bordered hover responsive className="text-center">
+            <Table striped bordered hover responsive className="text-center form">
               <thead>
                 <tr>
                   <th>Patient Name</th>

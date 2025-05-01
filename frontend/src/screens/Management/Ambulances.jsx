@@ -69,7 +69,7 @@ const Ambulances = () => {
             ) : ambulances.length === 0 ? (
               <p>No ambulances found</p>
             ) : (
-              <Table striped bordered hover className="ambulance-table">
+              <Table striped bordered hover className="ambulance-table form">
                 <thead>
                   <tr>
                     <th>Ambulance Number</th>

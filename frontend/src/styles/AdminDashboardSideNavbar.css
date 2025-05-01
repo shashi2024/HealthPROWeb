@@ -1,5 +1,5 @@
 .admin-dashboard {
-    background-color: #a6d7ee93;
+    background-color: #83e8ea;
     height: 80vh;
     position: absolute;
     width: 280px;
@@ -40,8 +40,8 @@
 }
 
 .admin-dashboard .nav-link.active {
-    background-color: #e6f7ff;
-    color: #007bff;
+    background-color: #c6f4f5;
+    color: #198d90;
 }
 
 @media (max-width: 768px) {

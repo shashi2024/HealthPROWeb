@@ -1,6 +1,6 @@
 /* Main container styling */
 .addRecord {
-    background-color: #d6e5f5; /* Light background for the form */
+    background-color: #d6edf5; /* Light background for the form */
     padding: 20px;
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
@@ -32,7 +32,7 @@ h2 {
 }
 
 .form-control:focus {
-    border-color: #007bff; /* Change border color on focus */
+    border-color: #00ddff; /* Change border color on focus */
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Light blue shadow on focus */
 }
 
@@ -46,22 +46,22 @@ button {
 
 /* Primary button styling */
 .btn-primary {
-    background-color: #007bff; /* Bootstrap primary color */
+    background-color: #00aab7; /* Bootstrap primary color */
     border: none; /* Remove default border */
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #00807e; /* Darker blue on hover */
 }
 
 /* Secondary button styling */
 .btn-secondary {
-    background-color: #6c757d; /* Bootstrap secondary color */
+    background-color: #6c7d7d; /* Bootstrap secondary color */
     border: none; /* Remove default border */
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268; /* Darker gray on hover */
+    background-color: #5a6668; /* Darker gray on hover */
 }
 
 /* Responsive styling for columns */
@@ -74,3 +74,7 @@ button {
         font-size: 24px; /* Smaller header font size */
     }
 }
+
+.form thead th{
+    background-color: #22bfc2;
+  }

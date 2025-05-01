@@ -1,5 +1,5 @@
 .AdminDashboard {
-    background-color: #f8f9fa; /* Light background for better contrast */
+    background-color: #f8fafa; /* Light background for better contrast */
     min-height: 100vh; /* Full height */
   }
   
@@ -22,7 +22,7 @@
   }
   
   .table th {
-    background-color: #164d88; /* Bootstrap primary color */
+    background-color: #167988; /* Bootstrap primary color */
     color: white; /* White text color for headers */
     font-weight: bold; /* Bold font for headers */
   }
@@ -46,7 +46,7 @@
   }
   
   .button:hover {
-    background-color: #36618f; /* Darker shade on hover */
+    background-color: #36808f; /* Darker shade on hover */
     transition: background-color 0.3s ease; /* Smooth transition */
   }
   

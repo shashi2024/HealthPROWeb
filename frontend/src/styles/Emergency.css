@@ -19,7 +19,7 @@
   }
   
   .emergency-table thead {
-    background-color: #007bff;
+    background-color: #00eaff;
     color: white;
   }
   
@@ -33,4 +33,24 @@
   .emergency-table tbody tr:hover {
     background-color: #f1f1f1;
   }
+
+  .emergency-report-button{
+    background-color: #167d7f !important;
+  }
+
+  .emergency-report-button:hover{
+    background-color: #0f5c5d !important;
+}
+
+.form thead th{
+  background-color: #22bfc2;
+}
+
+.assign-ambulance-button{
+  background-color: #15a3a5 !important;
+}
+
+.assign-ambulance-button:hover{
+  background-color: #064a4b !important;
+}
   

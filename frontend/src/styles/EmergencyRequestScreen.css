@@ -2,12 +2,12 @@
 
 h2 {
   text-align: center;
-  color: #004085;
+  color: #007385;
   margin-bottom: 30px;
 }
 
 form {
-  background-color: #98c5d8;
+  background-color: #67dae9;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -19,18 +19,18 @@ form .form-group {
 
 .form-control {
   border-radius: 5px;
-  border: 1px solid #ced4da;
+  border: 1px solid #ced8da;
   padding: 10px;
   font-size: 16px;
 }
 
 .form-control:focus {
-  border-color: #80bdff;
+  border-color: #80f4ff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 button {
-  background-color: #007bff;
+  background-color: #00ffff;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -41,7 +41,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #0095b3;
 }
 
 /* Error and success messages */
@@ -65,4 +65,12 @@ p[style*="color: green"] {
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
+}
+
+.add_btn{
+  background-color: #167d7f !important;
+}
+
+.add_btn:hover{
+  background-color: #0f5c5d !important;
 }
