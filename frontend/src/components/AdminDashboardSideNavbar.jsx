@@ -8,6 +8,8 @@ import {
   FaDollarSign,
   FaHeartbeat,
   FaFileMedical,
+  FaCarSide,
+  FaExclamationTriangle ,
 } from "react-icons/fa";
 import "../styles/AdminDashboardSideNavbar.css";
 
@@ -53,12 +55,12 @@ const AdminDashboardSideNavbar = () => {
         </LinkContainer>
         <LinkContainer to="/managementdashboard/ambulances">
           <Nav.Link>
-            <FaFileMedical /> Ambulances
+            <FaCarSide /> Ambulances
           </Nav.Link>
         </LinkContainer>
         <LinkContainer to="/managementdashboard/pandemicAlerts">
           <Nav.Link>
-            <FaFileMedical /> Alerts
+            <FaExclamationTriangle  /> Alerts
           </Nav.Link>
         </LinkContainer>
       </Nav>

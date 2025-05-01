@@ -1,6 +1,16 @@
   .alert-list {
-    margin: 20px;
-  }
+    /*margin-right: 0;
+    */background-color: #c0fbf7;
+    width: 70vw;
+    float: right;
+    padding: 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(1, 1, 0, 0.1);
+}
   
   .alert-header {
     border: 3px solid ;

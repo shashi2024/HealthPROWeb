@@ -3,8 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/AlertList.css";
 import { FaBookmark } from "react-icons/fa";
-
-
+import AdminDashboardSideNavbar from "../../../components/AdminDashboardSideNavbar";
+import { Col } from "react-bootstrap";
+import PandemicAlertPopup from "./PandemicAlertPopup"; // adjust path if different
 
 const AlertList = () => {
   const [alerts, setAlerts] = useState([]);
@@ -12,11 +13,26 @@ const AlertList = () => {
   const [completedAlerts, setCompletedAlerts] = useState({});
   const [importantAlerts, setImportantAlerts] = useState({});
   const navigate = useNavigate();
+  const [pandemicDetected, setPandemicDetected] = useState(false);
 
   useEffect(() => {
     axios
       .get("/api/alerts/generate")
-      .then((res) => setAlerts(res.data))
+      .catch((err) => console.error(err))
+      .then((res) => {
+        setAlerts(res.data);
+
+        // Check if any alert contains "pandemic" in symptoms
+        const foundPandemic = res.data.some((alert) =>
+          alert.symptoms.some((symptom) =>
+            symptom.toLowerCase().includes("pandemic")
+          )
+        );
+
+        if (foundPandemic) {
+          setPandemicDetected(true);
+        }
+      })
       .catch((err) => console.error(err));
   }, []);
 
@@ -91,91 +107,103 @@ const AlertList = () => {
   };
 
   return (
-    <div className="alert-list">
-      {Object.entries(groupedAlerts).map(([key, group]) => {
-        const firstAlert = group[0];
-        return (
-          <div key={key} className="alert-section">
-            <div className="alert-header" onClick={() => toggleSection(key)}>
-              <button
-                className={`icon-btn ${
-                  importantAlerts[firstAlert._id] ? "important" : ""
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleMarkImportant1(firstAlert._id);
-                }}
-              >
-                ♥
-              </button>
-              <button
-                className={`icon-btn ${
-                  importantAlerts[firstAlert._id] ? "important" : ""
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleMarkImportant2(firstAlert._id);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
+    <>
+      <Col md={3}>
+        <AdminDashboardSideNavbar /> {/* Side navbar component */}
+      </Col>
+      <PandemicAlertPopup
+        show={pandemicDetected}
+        onClose={() => setPandemicDetected(false)}
+      />
+
+      <div className="alert-list">
+        {Object.entries(groupedAlerts).map(([key, group]) => {
+          const firstAlert = group[0];
+          return (
+            <div key={key} className="alert-section">
+              <div className="alert-header" onClick={() => toggleSection(key)}>
+                <button
+                  className={`icon-btn ${
+                    importantAlerts[firstAlert._id] ? "important" : ""
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMarkImportant1(firstAlert._id);
+                  }}
                 >
-                  <path d="M2 2v13.5l6-3.5 6 3.5V2z" />
-                </svg>
-              </button>
-
-              <span className="location">{firstAlert.location}</span>
-              <span className="symptoms">
-                ({firstAlert.symptoms.join(", ")})
-              </span>
-              <span className="time">
-                {formatTimeAgo(firstAlert.timestamp)}
-              </span>
-              <span className="dropdown">{openSections[key] ? "▲" : "▼"}</span>
-            </div>
-
-            {openSections[key] && (
-              <div className="alert-details">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Patient Name</th>
-                      <th>Age Group</th>
-                      <th>Gender</th>
-                      <th>Hospital</th>
-                      <th>Phone Number</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {group.map((alert) => (
-                      <tr key={alert._id}>
-                        <td>{alert.patientName}</td>
-                        <td>{alert.ageGroup}</td>
-                        <td>{alert.gender}</td>
-                        <td>{alert.hospital}</td>
-                        <td>{alert.contactNumber}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div className="view-details">
-                  <button
-                    onClick={() => handleDeleteGroup(key)}
-                    className="delete-btn"
+                  ♥
+                </button>
+                <button
+                  className={`icon-btn ${
+                    importantAlerts[firstAlert._id] ? "important" : ""
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMarkImportant2(firstAlert._id);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
                   >
-                    Delete Alerts
-                  </button>
-                </div>
+                    <path d="M2 2v13.5l6-3.5 6 3.5V2z" />
+                  </svg>
+                </button>
+
+                <span className="location">{firstAlert.location}</span>
+                <span className="symptoms">
+                  ({firstAlert.symptoms.join(", ")})
+                </span>
+                <span className="time">
+                  {formatTimeAgo(firstAlert.timestamp)}
+                </span>
+                <span className="dropdown">
+                  {openSections[key] ? "▲" : "▼"}
+                </span>
               </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
+
+              {openSections[key] && (
+                <div className="alert-details">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Patient Name</th>
+                        <th>Age Group</th>
+                        <th>Gender</th>
+                        <th>Hospital</th>
+                        <th>Phone Number</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.map((alert) => (
+                        <tr key={alert._id}>
+                          <td>{alert.patientName}</td>
+                          <td>{alert.ageGroup}</td>
+                          <td>{alert.gender}</td>
+                          <td>{alert.hospital}</td>
+                          <td>{alert.contactNumber}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div className="view-details">
+                    <button
+                      onClick={() => handleDeleteGroup(key)}
+                      className="delete-btn"
+                    >
+                      Delete Alerts
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
