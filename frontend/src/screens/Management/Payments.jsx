@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Payments.css";
+import jsPDF from "jspdf";
 
 const Payments = ({ setTotalPayments, setTotalAmount }) => {
   const [payments, setPayments] = useState([]);
@@ -61,6 +62,34 @@ const Payments = ({ setTotalPayments, setTotalAmount }) => {
     }
   };
 
+  // PDF generator function
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("Payments Report", 14, 15);
+    doc.setFontSize(12);
+    let y = 30;
+    doc.text("#", 14, y);
+    doc.text("ID", 24, y);
+    doc.text("Amount", 90, y);
+    doc.text("Method", 120, y);
+    doc.text("Status", 140, y);
+    y += 8;
+    payments.forEach((payment, idx) => {
+      doc.text(String(idx + 1), 14, y);
+      doc.text(String(payment.user), 24, y);
+      doc.text(String(payment.amount), 90, y);
+      doc.text(String(payment.method), 120, y);
+      doc.text(String(payment.status), 134, y);
+      y += 8;
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
+    });
+    doc.save("Payments_Report.pdf");
+  };
+
   return (
     <Container fluid className="AdminDashboard">
       <Row>
@@ -70,6 +99,13 @@ const Payments = ({ setTotalPayments, setTotalAmount }) => {
         <Col md={9}>
           <div className="patient_list">
             <h2>All Payments</h2>
+            <Button
+              variant="info"
+              style={{ marginBottom: '16px', fontWeight: 'bold', color: '#fff' }}
+              onClick={generatePDF}
+            >
+              Download Payments Report (PDF)
+            </Button>
             <Table striped bordered hover responsive="sm" className="mt-4 form">
               <thead>
                 <tr>

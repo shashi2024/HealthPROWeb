@@ -78,7 +78,6 @@ const Recordshow = () => {
         addField("Start Date", record.startDate);
         addField("Prescribing Doctor", record.prescribingDoctor);
 
-
         doc.save(`Medical_Record_${record.fullName || "patient"}.pdf`);
     };
 
