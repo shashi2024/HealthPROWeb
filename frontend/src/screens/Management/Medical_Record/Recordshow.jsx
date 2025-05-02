@@ -200,13 +200,13 @@ const Recordshow = () => {
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-between align-items-center">
                     <div style={{ display: "flex", gap: "10px", width: "100%" }}>
-                        <Button variant="info" onClick={generatePDF}>
+                        <Button variant="info" onClick={generatePDF} style={{ flex: 1, height: '48px', fontWeight: 'bold', fontSize: '16px', borderRadius: '8px' }}>
                             Download PDF
                         </Button>
-                        <Link to={'/updaterecord/' + record._id}>
-                            <Button variant="warning">Update</Button>
+                        <Link to={'/updaterecord/' + record._id} style={{ flex: 1 }}>
+                            <Button variant="warning" style={{ width: '100%', height: '48px', fontWeight: 'bold', fontSize: '16px', borderRadius: '8px' }}>Update</Button>
                         </Link>
-                        <Button variant="danger" onClick={() => deleteRecord(record._id)}>
+                        <Button variant="danger" onClick={() => deleteRecord(record._id)} style={{ flex: 1, height: '48px', fontWeight: 'bold', fontSize: '16px', borderRadius: '8px' }}>
                             Delete
                         </Button>
                     </div>

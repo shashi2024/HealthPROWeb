@@ -7,6 +7,7 @@ import "../../styles/Reports.css";
 
 const Reports = () => {
   const [records, setRecords] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +21,22 @@ const Reports = () => {
     };
     fetchRecords();
   }, []);
+
+  // Filter records based on search term
+  const filteredRecords = records.filter((record, idx) => {
+    const name = record.user?.name?.toLowerCase() || "";
+    const email = record.user?.email?.toLowerCase() || "";
+    const condition = record.condition?.toLowerCase() || "";
+    const doctor = record.prescribingDoctor?.toLowerCase() || "";
+    const rowNumber = (idx + 1).toString();
+    return (
+      name.includes(searchTerm.toLowerCase()) ||
+      email.includes(searchTerm.toLowerCase()) ||
+      condition.includes(searchTerm.toLowerCase()) ||
+      doctor.includes(searchTerm.toLowerCase()) ||
+      rowNumber.includes(searchTerm)
+    );
+  });
 
   const handleViewRecords = (patientId) => {
     navigate(`/admin/reports/scan/recordshow/${patientId}`);
@@ -52,6 +69,15 @@ const Reports = () => {
               Add New
             </Button>
           </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Search by name, email, or condition..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              style={{ marginBottom: '16px', padding: '6px 12px', width: '300px', borderRadius: '6px', border: '1px solid #ccc' }}
+            />
+          </div>
           <div className="report_list">
             <Table className="form">
               <thead>
@@ -66,10 +92,14 @@ const Reports = () => {
                 </tr>
               </thead>
               <tbody>
-                {records.length > 0 ? (
-                  records.map((record, index) => (
+                {filteredRecords.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="text-center">No records found.</td>
+                  </tr>
+                ) : (
+                  filteredRecords.map((record, idx) => (
                     <tr key={record._id}>
-                      <td>{index + 1}</td>
+                      <td>{idx + 1}</td>
                       <td>{record.user?.name}</td>
                       
                       <td>{record.condition}</td>
@@ -85,12 +115,6 @@ const Reports = () => {
                       </td>
                     </tr>
                   ))
-                ) : (
-                  <tr>
-                    <td colSpan="7" className="text-center no-patients">
-                      No records found
-                    </td>
-                  </tr>
                 )}
               </tbody>
             </Table>
