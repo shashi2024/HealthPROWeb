@@ -13,7 +13,7 @@ import emergencyRequestRoutes from "./routes/emergencyRequestRoutes.js";
 import ambulanceRoutes from "./routes/ambulanceRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 
-import RecordRoutes from "./routes/RecordRoutes.js";
+import RecordRoutes from "./routes/recordRoutes.js";
 
 import alertRoutes from "./routes/alertRoutes.js";
 

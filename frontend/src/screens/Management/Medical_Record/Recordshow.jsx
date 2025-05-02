@@ -150,6 +150,11 @@ const Recordshow = () => {
                                             <strong>Prescribing Doctor:</strong> {record.prescribingDoctor}
                                         </Col>
                                     </Row>
+                                    <Row className="record-row">
+                                        <Col xs={6}>
+                                            <strong>Patient Name:</strong> {record.user?.name}
+                                        </Col>
+                                    </Row>
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer className="d-flex justify-content-between">

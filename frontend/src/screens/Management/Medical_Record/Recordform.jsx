@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
@@ -41,6 +41,12 @@ const Addrecords = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const userId = queryParams.get("patientId"); // Get the patientId from the URL
+    const [patients, setPatients] = useState([]);
+    const [selectedPatient, setSelectedPatient] = useState("");
+
+    useEffect(() => {
+        axios.get("/api/users/patients").then(res => setPatients(res.data));
+    }, []);
 
     const inputChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -53,8 +59,10 @@ const Addrecords = () => {
     const submitForm = async (e) => {
         e.preventDefault();
         
-        if (!userId) {
-            alert("No patient selected for this record.");
+        // Use patientId from URL or selectedPatient from dropdown
+        const patientForRecord = userId || selectedPatient;
+        if (!patientForRecord) {
+            alert("Please select a patient.");
             return;
         }
 
@@ -64,12 +72,12 @@ const Addrecords = () => {
             return;
         }
 
-        const recordWithUserId = { ...record, user: userId };
+        const recordWithUserId = { ...record, user: patientForRecord };
 
         try {
             const response = await axios.post("http://localhost:5000/api/rcreate", recordWithUserId);
             alert(response.data.msg);
-            navigate(`/admin/reports/scan/recordshow?patientId=${userId}`);
+            navigate(`/admin/reports/scan/recordshow?patientId=${patientForRecord}`);
         } catch (error) {
             console.error("Error details:", error.response ? error.response.data : error.message);
             alert("Error creating record: " + (error.response?.data?.msg || error.message));
@@ -84,6 +92,25 @@ const Addrecords = () => {
 
             <h3>Demographic Information</h3>
             <Form className="addRecordForm" onSubmit={submitForm}>
+                {/* Patient selection dropdown if no patientId in URL */}
+                {!userId && (
+                  <Form.Group controlId="patient">
+                    <Form.Label>Patient</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={selectedPatient}
+                      onChange={e => setSelectedPatient(e.target.value)}
+                    >
+                      <option value="">Select Patient</option>
+                      {patients.map(patient => (
+                        <option key={patient._id} value={patient._id}>
+                          {patient.name} ({patient.email})
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                )}
+
                 <Row>
                     <Col md={6}>
                         <Form.Group controlId="fullName">
@@ -488,6 +515,8 @@ const Addrecords = () => {
                         </Form.Group>
                     </Col>
                 </Row>
+
+                
 
                 <Button variant="primary" type="submit">
                     Submit

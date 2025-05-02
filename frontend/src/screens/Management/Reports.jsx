@@ -26,14 +26,33 @@ const Reports = () => {
   };
 
   return (
-    <Container fluid className="AdminDashboard">
+    <Container fluid className="AdminDashboard" style={{ paddingLeft: 0 }}>
       <Row>
         <Col md={3}>
           <AdminDashboardSideNavbar />
         </Col>
-        <Col md={9}>
-          <div className="report_list">
+        <Col md={9} style={{ marginLeft: 0, paddingLeft: 0 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <h2>Medical Records</h2>
+            <Button
+              style={{
+                backgroundColor: '#00bfc8',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                height: '40px',
+                width: '120px',
+                fontSize: '16px',
+                fontWeight: '500',
+                marginBottom: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
+              }}
+              onClick={() => navigate("/admin/reports/scan/record-form")}
+            >
+              Add New
+            </Button>
+          </div>
+          <div className="report_list">
             <Table className="form">
               <thead>
                 <tr>
@@ -61,7 +80,7 @@ const Reports = () => {
                           className="button"
                           onClick={() => handleViewRecords(record.user?._id)}
                         >
-                          View All Records
+                          View Record
                         </Button>
                       </td>
                     </tr>
