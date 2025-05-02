@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import Record from "../models/RecordModel.js";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
@@ -354,6 +355,14 @@ const deleteUserDetails = asyncHandler(async (req, res) => {
   }
 });
 
+const getPatientsWithRecords = asyncHandler(async (req, res) => {
+  // Find all unique user IDs in the Record collection
+  const userIdsWithRecords = await Record.distinct("user");
+  // Find users whose _id is in that list and role is Patient
+  const patients = await User.find({ _id: { $in: userIdsWithRecords }, role: "Patient" });
+  res.json(patients);
+});
+
 export {
   authUser,
   registerUser,
@@ -366,4 +375,5 @@ export {
   getOneUserById,
   updateUserDetails,
   deleteUserDetails,
+  getPatientsWithRecords,
 };

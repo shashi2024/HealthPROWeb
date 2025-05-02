@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap"; // Import Button for styling
 import qrCodeImage from "../../../images/qrcode.png"; // Adjust the path accordingly
 
@@ -21,9 +21,13 @@ const Scan = () => {
       <img src={qrCodeImage} alt="QR Code" style={{ width: "256px", height: "256px" }} />
       <br />
       {/* Scan Button */}
-      <Button variant="danger" onClick={handleScanClick} style={{ marginTop: "20px" }}>
+      <Link
+        to={`/admin/reports/scan/recordshow?patientId=${patientId}`}
+        className="btn btn-danger"
+        style={{ marginTop: "20px" }}
+      >
         Scan Card
-      </Button>
+      </Link>
     </div>
   );
 };

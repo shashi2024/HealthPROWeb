@@ -1,78 +1,120 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Table, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import AdminDashboardSideNavbar from "../../components/AdminDashboardSideNavbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../../styles/Reports.css";
 
 const Reports = () => {
-  const [patients, setPatients] = useState([]);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [records, setRecords] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  // Fetch patients from the backend
   useEffect(() => {
-    const fetchPatients = async () => {
+    const fetchRecords = async () => {
       try {
-        const { data } = await axios.get("/api/users/patients"); // Fetch the patients list
-        setPatients(data);
+        const { data } = await axios.get("/api/records-with-patient");
+        setRecords(data);
       } catch (error) {
-        console.error("Error fetching patients:", error);
+        console.error("Error fetching records:", error);
       }
     };
-
-    fetchPatients();
+    fetchRecords();
   }, []);
 
+  // Filter records based on search term
+  const filteredRecords = records.filter((record, idx) => {
+    const name = record.user?.name?.toLowerCase() || "";
+    const email = record.user?.email?.toLowerCase() || "";
+    const condition = record.condition?.toLowerCase() || "";
+    const doctor = record.prescribingDoctor?.toLowerCase() || "";
+    const rowNumber = (idx + 1).toString();
+    return (
+      name.includes(searchTerm.toLowerCase()) ||
+      email.includes(searchTerm.toLowerCase()) ||
+      condition.includes(searchTerm.toLowerCase()) ||
+      doctor.includes(searchTerm.toLowerCase()) ||
+      rowNumber.includes(searchTerm)
+    );
+  });
+
   const handleViewRecords = (patientId) => {
-    // Navigate to the Scan component under reports with patientId as a query parameter
-    navigate(`/admin/reports/scan?patientId=${patientId}`);
+    navigate(`/admin/reports/scan/recordshow/${patientId}`);
   };
 
   return (
-    <Container fluid className="AdminDashboard">
+    <Container fluid className="AdminDashboard" style={{ paddingLeft: 0 }}>
       <Row>
         <Col md={3}>
           <AdminDashboardSideNavbar />
         </Col>
-        <Col md={9}>
+        <Col md={9} style={{ marginLeft: 0, paddingLeft: 0 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h2>Medical Records</h2>
+            <Button
+              style={{
+                backgroundColor: '#00bfc8',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                height: '40px',
+                width: '120px',
+                fontSize: '16px',
+                fontWeight: '500',
+                marginBottom: '8px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
+              }}
+              onClick={() => navigate("/admin/reports/scan/record-form")}
+            >
+              Add New
+            </Button>
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Search by name, email, or condition..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              style={{ marginBottom: '16px', padding: '6px 12px', width: '300px', borderRadius: '6px', border: '1px solid #ccc' }}
+            />
+          </div>
           <div className="report_list">
-            <h2>Patients</h2>
-            {/* Display patients in a table */}
             <Table className="form">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Actions</th> {/* New Actions Column */}
+                  <th>Patient Name</th>
+                  
+                  <th>Condition</th>
+                  
+                  <th>Doctor</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {patients.length > 0 ? (
-                  patients.map((patient, index) => (
-                    <tr key={patient._id}>
-                      <td>{index + 1}</td> {/* Display index as serial number */}
-                      <td>{patient.name}</td>
-                      <td>{patient.email}</td>
-                      <td>{patient.role}</td>
+                {filteredRecords.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="text-center">No records found.</td>
+                  </tr>
+                ) : (
+                  filteredRecords.map((record, idx) => (
+                    <tr key={record._id}>
+                      <td>{idx + 1}</td>
+                      <td>{record.user?.name}</td>
+                      
+                      <td>{record.condition}</td>
+                      
+                      <td>{record.prescribingDoctor}</td>
                       <td>
-                        {/* View Records Button */}
                         <Button
-                          className="button" // Apply custom button class
-                          onClick={() => handleViewRecords(patient._id)}
+                          className="button"
+                          onClick={() => handleViewRecords(record._id)}
                         >
-                          View Records
+                          View Record
                         </Button>
                       </td>
                     </tr>
                   ))
-                ) : (
-                  <tr>
-                    <td colSpan="5" className="text-center no-patients"> {/* Center the no patients message */}
-                      No patients found
-                    </td>
-                  </tr>
                 )}
               </tbody>
             </Table>

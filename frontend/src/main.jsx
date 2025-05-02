@@ -135,7 +135,7 @@ const router = createBrowserRouter(
           path="/admin/reports/scan/record-form"
           element={<RecordForm />}
         />
-        <Route path="/recordshow" element={<Recordshow />} />
+        <Route path="/admin/reports/scan/recordshow/:recordId" element={<Recordshow />} />
         <Route path="/updaterecord/:id" element={<Editrecord />} />
 
         <Route

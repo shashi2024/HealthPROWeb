@@ -1,31 +1,77 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Row, Col } from "react-bootstrap";
+import jsPDF from "jspdf";
 
 const MedicalRecordScreen = () => {
   const [records, setRecords] = useState([]);
 
+  const userInfo = JSON.parse(localStorage.getItem("userInfo")); // or from context
+  const userId = userInfo?._id;
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    return new Date(dateString).toISOString().split('T')[0];
+  };
+
   // Fetch data when the component mounts
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMyRecords = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/rgetall`);
-        setRecords(response.data); // Corrected here
+        const { data } = await axios.get(`/api/rgetall?user=${userId}`);
+        setRecords(data);
       } catch (error) {
         console.error("Error fetching records:", error);
         alert("Error fetching records. Please try again."); // Basic error handling
       }
     };
-
-    fetchData();
-  }, []);
+    if (userId) fetchMyRecords();
+  }, [userId]);
 
   // Function to delete a record
+
+  const generatePDF = (record) => {
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("Medical Record", 14, 15);
+    doc.setFontSize(12);
+    let y = 30;
+    const addField = (label, value) => {
+      doc.text(`${label}: ${value || ""}`, 14, y);
+      y += 8;
+    };
+    addField("Full Name", record.fullName);
+    addField("Date of Birth", formatDate(record.dob));
+    addField("Age", record.age);
+    addField("Gender", record.gender);
+    addField("Address", record.address);
+    addField("Contact Number", record.contactNumber);
+    addField("Email", record.email);
+    addField("Emergency Contact", record.emergencyContact);
+    addField("Marital Status", record.maritalStatus);
+    addField("Occupation", record.occupation);
+    addField("Nationality", record.nationality);
+    addField("Family Members", record.familymember);
+    addField("Current Condition", record.condition);
+    addField("Past Conditions", record.pastcondition);
+    addField("Surgery History", record.surgery);
+    addField("Current Medicine", record.currentmedicine);
+    addField("Drug Name", record.drugName);
+    addField("Dosage", record.dosage);
+    addField("Allergies", record.allergies);
+    addField("Smoking Habits", record.smokingHabits);
+    addField("Pregnancies", record.pregnancies);
+    addField("Menstrual History", record.menstrualHistory);
+    addField("Treatment", record.treatment);
+    addField("Start Date", formatDate(record.startDate));
+    addField("Prescribing Doctor", record.prescribingDoctor);
+    doc.save(`Medical_Record_${record.fullName || "patient"}.pdf`);
+  };
 
   return (
     <div className="recordList">
       <Row xs={1} md={2} className="g-4">
-        {records.map((record) => (
+        {records.slice(-1).map((record) => (
           <Col key={record._id}>
             <Card className="report-card h-100">
               <Card.Body>
@@ -36,7 +82,7 @@ const MedicalRecordScreen = () => {
                       <strong>Full Name:</strong> {record.fullName}
                     </Col>
                     <Col xs={6}>
-                      <strong>Date of Birth:</strong> {record.dob}
+                      <strong>Date of Birth:</strong> {formatDate(record.dob)}
                     </Col>
                   </Row>
                   <Row className="record-row">
@@ -127,7 +173,7 @@ const MedicalRecordScreen = () => {
                       <strong>Treatment:</strong> {record.treatment}
                     </Col>
                     <Col xs={6}>
-                      <strong>Start Date:</strong> {record.startDate}
+                      <strong>Start Date:</strong> {formatDate(record.startDate)}
                     </Col>
                   </Row>
                   <Row className="record-row">
@@ -138,7 +184,23 @@ const MedicalRecordScreen = () => {
                   </Row>
                 </Card.Text>
               </Card.Body>
-              <Card.Footer className="d-flex justify-content-between"></Card.Footer>
+              <Card.Footer className="d-flex justify-content-between">
+                <button
+                  style={{
+                    flex: 1,
+                    height: '40px',
+                    fontWeight: 'bold',
+                    fontSize: '15px',
+                    borderRadius: '8px',
+                    background: '#00bfc8',
+                    color: '#fff',
+                    border: 'none'
+                  }}
+                  onClick={() => generatePDF(record)}
+                >
+                  Download PDF
+                </button>
+              </Card.Footer>
             </Card>
           </Col>
         ))}

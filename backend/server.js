@@ -13,7 +13,7 @@ import emergencyRequestRoutes from "./routes/emergencyRequestRoutes.js";
 import ambulanceRoutes from "./routes/ambulanceRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 
-import RecordRoutes from "./routes/RecordRoutes.js";
+import RecordRoutes from "./routes/recordRoutes.js";
 
 import alertRoutes from "./routes/alertRoutes.js";
 
@@ -24,7 +24,12 @@ const port = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
