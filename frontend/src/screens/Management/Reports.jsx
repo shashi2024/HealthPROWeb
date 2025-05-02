@@ -1,31 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Table, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import AdminDashboardSideNavbar from "../../components/AdminDashboardSideNavbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../../styles/Reports.css";
 
 const Reports = () => {
-  const [patients, setPatients] = useState([]);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [records, setRecords] = useState([]);
+  const navigate = useNavigate();
 
-  // Fetch patients from the backend
   useEffect(() => {
-    const fetchPatients = async () => {
+    const fetchRecords = async () => {
       try {
-        const { data } = await axios.get("/api/users/patients"); // Fetch the patients list
-        setPatients(data);
+        const { data } = await axios.get("/api/records-with-patient");
+        setRecords(data);
       } catch (error) {
-        console.error("Error fetching patients:", error);
+        console.error("Error fetching records:", error);
       }
     };
-
-    fetchPatients();
+    fetchRecords();
   }, []);
 
   const handleViewRecords = (patientId) => {
-    // Navigate to the Scan component under reports with patientId as a query parameter
-    navigate(`/admin/reports/scan?patientId=${patientId}`);
+    navigate(`/admin/reports/scan/recordshow?patientId=${patientId}`);
   };
 
   return (
@@ -36,41 +33,43 @@ const Reports = () => {
         </Col>
         <Col md={9}>
           <div className="report_list">
-            <h2>Patients</h2>
-            {/* Display patients in a table */}
+            <h2>Medical Records</h2>
             <Table className="form">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Actions</th> {/* New Actions Column */}
+                  <th>Patient Name</th>
+                  
+                  <th>Condition</th>
+                  
+                  <th>Doctor</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {patients.length > 0 ? (
-                  patients.map((patient, index) => (
-                    <tr key={patient._id}>
-                      <td>{index + 1}</td> {/* Display index as serial number */}
-                      <td>{patient.name}</td>
-                      <td>{patient.email}</td>
-                      <td>{patient.role}</td>
+                {records.length > 0 ? (
+                  records.map((record, index) => (
+                    <tr key={record._id}>
+                      <td>{index + 1}</td>
+                      <td>{record.user?.name}</td>
+                      
+                      <td>{record.condition}</td>
+                      
+                      <td>{record.prescribingDoctor}</td>
                       <td>
-                        {/* View Records Button */}
                         <Button
-                          className="button" // Apply custom button class
-                          onClick={() => handleViewRecords(patient._id)}
+                          className="button"
+                          onClick={() => handleViewRecords(record.user?._id)}
                         >
-                          View Records
+                          View All Records
                         </Button>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5" className="text-center no-patients"> {/* Center the no patients message */}
-                      No patients found
+                    <td colSpan="7" className="text-center no-patients">
+                      No records found
                     </td>
                   </tr>
                 )}

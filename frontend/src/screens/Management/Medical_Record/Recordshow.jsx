@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import "../../../styles/Recordshow.css";
 
-const Record = () => {
+const Recordshow = () => {
     const [records, setRecords] = useState([]);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const patientId = queryParams.get("patientId");
 
     // Fetch data when the component mounts
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/rgetall`);
-                setRecords(response.data); // Corrected here
+                const response = await axios.get(`http://localhost:5000/api/rgetall?user=${patientId}`);
+                setRecords(response.data);
             } catch (error) {
                 console.error("Error fetching records:", error);
                 alert("Error fetching records. Please try again."); // Basic error handling
@@ -20,7 +23,7 @@ const Record = () => {
         };
 
         fetchData();
-    }, []);
+    }, [patientId]);
 
     // Function to delete a record
     const deleteRecord = async (recordId) => {
@@ -36,8 +39,6 @@ const Record = () => {
 
     
     return (
-        <div className='recordList'>
-            <Link to={"/admin/reports/scan/record-form"} className='btn btn-primary mb-3'>Add New</Link>
 
             
             <Row xs={1} md={2} className="g-4">
@@ -162,8 +163,8 @@ const Record = () => {
                 ))}
                 
             </Row>
-        </div>
+       
     );
 };
 
-export default Record;
+export default Recordshow;

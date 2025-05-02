@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../../styles/Record.css";
+
 const Addrecords = () => {
     const initialRecordState = {
         fullName: "",
@@ -37,6 +38,9 @@ const Addrecords = () => {
 
     const [record, setRecord] = useState(initialRecordState);
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const userId = queryParams.get("patientId"); // Get the patientId from the URL
 
     const inputChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -49,31 +53,32 @@ const Addrecords = () => {
     const submitForm = async (e) => {
         e.preventDefault();
         
-        // Assuming you have the user ID available, e.g., from a user context or state
-        const userId = "user_id_here"; // Replace this with the actual user ID
-    
-        // Add the user ID to the record object
-        const recordWithUserId = { ...record, user: userId }; // Spread the existing record and add the user ID
-    
-        console.log(recordWithUserId);  // Check the data structure here
-        
+        if (!userId) {
+            alert("No patient selected for this record.");
+            return;
+        }
+
+        // Validate required fields
+        if (!record.dob || !record.gender || !record.contactNumber) {
+            alert("Please fill in all required fields: Date of Birth, Gender, and Contact Number");
+            return;
+        }
+
+        const recordWithUserId = { ...record, user: userId };
+
         try {
             const response = await axios.post("http://localhost:5000/api/rcreate", recordWithUserId);
             alert(response.data.msg);
-            navigate("/recordshow"); // Adjust the route according to your setup
+            navigate(`/admin/reports/scan/recordshow?patientId=${userId}`);
         } catch (error) {
             console.error("Error details:", error.response ? error.response.data : error.message);
             alert("Error creating record: " + (error.response?.data?.msg || error.message));
         }
     };
 
-    
-
-    
-
     return (
         <Container className='addRecord'>
-            <Link to="/recordshow">
+            <Link to="/managementdashboard/reports">
                 <Button variant="secondary" className="mb-3">Back</Button>
             </Link>
 
@@ -161,12 +166,13 @@ const Addrecords = () => {
                         <Form.Group controlId="contactNumber">
                             <Form.Label>Contact Number</Form.Label>
                             <Form.Control 
-                                type="number" 
+                                type="text" 
                                 onChange={inputChangeHandler} 
                                 name="contactNumber" 
                                 placeholder="Enter contact number" 
                                 value={record.contactNumber} 
                                 autoComplete="off"
+                                required
                             />
                         </Form.Group>
                     </Col>
@@ -475,7 +481,7 @@ const Addrecords = () => {
                                 type="text" 
                                 onChange={inputChangeHandler} 
                                 name="prescribingDoctor" 
-                                placeholder="Enter prescribing doctor’s name" 
+                                placeholder="Enter prescribing doctor's name" 
                                 value={record.prescribingDoctor} 
                                 autoComplete="off"
                             />

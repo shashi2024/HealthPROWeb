@@ -11,6 +11,7 @@ import {
   getOneUserById,
   updateUserDetails,
   deleteUserDetails,
+  getPatientsWithRecords,
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -24,6 +25,7 @@ router
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 router.get("/patients", protect, getPatients); // Protect ensures only authenticated users can access
+router.get("/patients-with-records", getPatientsWithRecords);
 
 router.post("/addnewuser", addNewUser);
 router.get("/getallusers", getAllUsers);
