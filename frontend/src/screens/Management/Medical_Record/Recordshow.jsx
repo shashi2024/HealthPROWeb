@@ -82,21 +82,24 @@ const Recordshow = () => {
         doc.save(`Medical_Record_${record.fullName || "patient"}.pdf`);
     };
 
+    // Helper function to format date
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        return new Date(dateString).toISOString().split('T')[0];
+    };
+
     return (
         <Container>
             <Card className="report-card h-100">
                 <Card.Body>
                     <Card.Title className="report-title">Medical Record</Card.Title>
-                    <Button variant="info" onClick={generatePDF} style={{ marginBottom: "16px" }}>
-                        Download PDF
-                    </Button>
                     <Card.Text>
                         <Row className="record-row">
                             <Col xs={6}>
                                 <strong>Full Name:</strong> {record.fullName}
                             </Col>
                             <Col xs={6}>
-                                <strong>Date of Birth:</strong>{record.dob}
+                                <strong>Date of Birth:</strong>{formatDate(record.dob)}
                             </Col>
                         </Row>
                         <Row className="record-row">
@@ -185,7 +188,7 @@ const Recordshow = () => {
                                 <strong>Treatment:</strong> {record.treatment}
                             </Col>
                             <Col xs={6}>
-                                <strong>Start Date:</strong> {record.startDate}
+                                <strong>Start Date:</strong> {formatDate(record.startDate)}
                             </Col>
                         </Row>
                         <Row className="record-row">
@@ -195,11 +198,18 @@ const Recordshow = () => {
                         </Row>                    
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer className="d-flex justify-content-between">
-                    <Link to={'/updaterecord/' + record._id}>
-                        <Button variant="warning">Update</Button>
-                    </Link>
-                    <Button variant="danger" onClick={() => deleteRecord(record._id)}>Delete</Button>
+                <Card.Footer className="d-flex justify-content-between align-items-center">
+                    <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+                        <Button variant="info" onClick={generatePDF}>
+                            Download PDF
+                        </Button>
+                        <Link to={'/updaterecord/' + record._id}>
+                            <Button variant="warning">Update</Button>
+                        </Link>
+                        <Button variant="danger" onClick={() => deleteRecord(record._id)}>
+                            Delete
+                        </Button>
+                    </div>
                 </Card.Footer>
             </Card>
         </Container>
