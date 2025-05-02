@@ -22,7 +22,7 @@ const Reports = () => {
   }, []);
 
   const handleViewRecords = (patientId) => {
-    navigate(`/admin/reports/scan/recordshow?patientId=${patientId}`);
+    navigate(`/admin/reports/scan/recordshow/${patientId}`);
   };
 
   return (
@@ -78,7 +78,7 @@ const Reports = () => {
                       <td>
                         <Button
                           className="button"
-                          onClick={() => handleViewRecords(record.user?._id)}
+                          onClick={() => handleViewRecords(record._id)}
                         >
                           View Record
                         </Button>
