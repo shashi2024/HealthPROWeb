@@ -1,12 +1,15 @@
 .recordList {
-    padding: 10px;
-    margin-right: -300px;
-   align-self: center;
-    
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
 }
 
 .report-card {
-    max-width: 100%;
+    width: 100%;
+    max-width: 900px;
     margin: 0 auto;
     border-radius: 12px;
     border: 1px solid #ddd;

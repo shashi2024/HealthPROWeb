@@ -77,7 +77,7 @@ const Addrecords = () => {
         try {
             const response = await axios.post("http://localhost:5000/api/rcreate", recordWithUserId);
             alert(response.data.msg);
-            navigate(`/admin/reports/scan/recordshow?patientId=${patientForRecord}`);
+            navigate(`/admin/reports/scan/recordshow/${response.data.data._id}`);
         } catch (error) {
             console.error("Error details:", error.response ? error.response.data : error.message);
             alert("Error creating record: " + (error.response?.data?.msg || error.message));

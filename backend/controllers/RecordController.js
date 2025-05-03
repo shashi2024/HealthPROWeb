@@ -41,14 +41,17 @@ export const rgetAll = async (req, res) => {
 export const rgetOne = async (req, res) => {
   try {
     const id = req.params.id;
+    console.log("Fetching record with ID:", id);
     const recordExist = await Record.findById(id);
 
     if (!recordExist) {
+      console.log("Record not found for ID:", id);
       return res.status(404).json({ msg: "Patient record not found" });
     }
 
     res.status(200).json(recordExist);
   } catch (error) {
+    console.error("Error in rgetOne:", error);
     res.status(500).json({ error: error.message });
   }
 };

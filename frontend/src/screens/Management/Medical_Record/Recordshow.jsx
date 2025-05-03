@@ -1,29 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { Card, Button, Row, Col, Container } from 'react-bootstrap';
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { Container, Button, Card, Row, Col } from "react-bootstrap";
 import "../../../styles/Recordshow.css";
 import jsPDF from "jspdf";
 
 const Recordshow = () => {
-    const { recordId } = useParams();
     const [record, setRecord] = useState(null);
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchRecord = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/rgetone/${recordId}`);
-                setRecord(response.data);
+                const { data } = await axios.get(`http://localhost:5000/api/rgetone/${id}`);
+                setRecord(data);
             } catch (error) {
                 console.error("Error fetching record:", error);
-                alert("Error fetching record. Please try again.");
+                alert("Error fetching record: " + (error.response?.data?.msg || error.message));
             }
         };
+        fetchRecord();
+    }, [id]);
 
-        if (recordId) {
-            fetchData();
-        }
-    }, [recordId]);
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        return new Date(dateString).toISOString().split('T')[0];
+    };
 
     if (!record) {
         return <div>Loading...</div>;
@@ -33,10 +36,11 @@ const Recordshow = () => {
     const deleteRecord = async (recordId) => {
         try {
             await axios.delete(`http://localhost:5000/api/rdelete/${recordId}`);
-            alert("Record deleted successfully."); // Basic feedback
+            alert("Record deleted successfully.");
+            navigate("/managementdashboard/reports"); // Auto navigate to reports page
         } catch (error) {
             console.error("Error deleting record:", error);
-            alert("Error deleting record. Please try again."); // Basic error handling
+            alert("Error deleting record. Please try again.");
         }
     };
 
@@ -81,15 +85,24 @@ const Recordshow = () => {
         doc.save(`Medical_Record_${record.fullName || "patient"}.pdf`);
     };
 
-    // Helper function to format date
-    const formatDate = (dateString) => {
-        if (!dateString) return '';
-        return new Date(dateString).toISOString().split('T')[0];
-    };
-
     return (
-        <Container>
-            <Card className="report-card h-100">
+        <Container className="recordList">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <Link to="/managementdashboard/reports">
+                    <Button variant="secondary">Back</Button>
+                </Link>
+                <div>
+                    <Button 
+                        variant="primary" 
+                        className="me-2"
+                        onClick={() => navigate(`/admin/reports/scan/editrecord/${id}`)}
+                    >
+                        Edit Record
+                    </Button>
+                </div>
+            </div>
+
+            <Card className="report-card">
                 <Card.Body>
                     <Card.Title className="report-title">Medical Record</Card.Title>
                     <Card.Text>
@@ -98,7 +111,7 @@ const Recordshow = () => {
                                 <strong>Full Name:</strong> {record.fullName}
                             </Col>
                             <Col xs={6}>
-                                <strong>Date of Birth:</strong>{formatDate(record.dob)}
+                                <strong>Date of Birth:</strong> {formatDate(record.dob)}
                             </Col>
                         </Row>
                         <Row className="record-row">
@@ -132,7 +145,6 @@ const Recordshow = () => {
                             <Col xs={6}>
                                 <strong>Occupation:</strong> {record.occupation}
                             </Col>
-                           
                         </Row>
                         <Row className="record-row">
                             <Col xs={6}>
@@ -194,7 +206,7 @@ const Recordshow = () => {
                             <Col xs={6}>
                                 <strong>Prescribing Doctor:</strong> {record.prescribingDoctor}
                             </Col>
-                        </Row>                    
+                        </Row>
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-between align-items-center">
@@ -202,9 +214,6 @@ const Recordshow = () => {
                         <Button variant="info" onClick={generatePDF} style={{ flex: 1, height: '48px', fontWeight: 'bold', fontSize: '16px', borderRadius: '8px' }}>
                             Download PDF
                         </Button>
-                        <Link to={'/updaterecord/' + record._id} style={{ flex: 1 }}>
-                            <Button variant="warning" style={{ width: '100%', height: '48px', fontWeight: 'bold', fontSize: '16px', borderRadius: '8px' }}>Update</Button>
-                        </Link>
                         <Button variant="danger" onClick={() => deleteRecord(record._id)} style={{ flex: 1, height: '48px', fontWeight: 'bold', fontSize: '16px', borderRadius: '8px' }}>
                             Delete
                         </Button>
