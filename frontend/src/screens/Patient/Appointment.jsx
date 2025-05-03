@@ -47,11 +47,15 @@ const Appointment = () => {
   const validateForm = () => {
     const newErrors = {};
     
-    // Name validation
+    // Name validation - letters only
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     } else if (formData.name.length < 3) {
       newErrors.name = "Name must be at least 3 characters long";
+    } else if (formData.name.length > 50) {
+      newErrors.name = "Name cannot exceed 50 characters";
+    } else if (!/^[A-Za-z]+$/.test(formData.name)) {
+      newErrors.name = "Name must contain only letters (A-Z, a-z)";
     }
 
     // Age validation
@@ -65,7 +69,9 @@ const Appointment = () => {
     if (!formData.contactNumber) {
       newErrors.contactNumber = "Contact number is required";
     } else if (!/^[0-9]{10}$/.test(formData.contactNumber)) {
-      newErrors.contactNumber = "Please enter a valid 10-digit phone number";
+      newErrors.contactNumber = "Contact number must be exactly 10 digits";
+    } else if (!/^[0-9]+$/.test(formData.contactNumber)) {
+      newErrors.contactNumber = "Contact number must contain only numbers";
     }
 
     // Specialization validation
@@ -99,9 +105,13 @@ const Appointment = () => {
       newErrors.starttime = "Time is required";
     }
 
-    // Symptoms validation
+    // Symptoms validation - letters only
     if (!formData.symptoms.trim()) {
-      newErrors.symptoms = "Please describe your symptoms";
+      newErrors.symptoms = "Symptoms are required";
+    } else if (formData.symptoms.length < 5) {
+      newErrors.symptoms = "Symptoms must be at least 5 characters long";
+    } else if (!/^[A-Za-z\s,]+$/.test(formData.symptoms)) {
+      newErrors.symptoms = "Symptoms must contain only letters, spaces, and commas";
     }
 
     // Gender validation
@@ -286,6 +296,9 @@ const Appointment = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      onInput={e => {
+                        e.target.value = e.target.value.replace(/[^A-Za-z]/g, '');
+                      }}
                       isInvalid={!!errors.name}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -356,6 +369,10 @@ const Appointment = () => {
                       name="contactNumber"
                       value={formData.contactNumber}
                       onChange={handleChange}
+                      onInput={e => {
+                        // Allow only numbers and limit to 10 digits
+                        e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
+                      }}
                       isInvalid={!!errors.contactNumber}
                     />
                     <Form.Control.Feedback type="invalid">
