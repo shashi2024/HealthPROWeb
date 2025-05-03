@@ -63,7 +63,7 @@ const Editrecord = () => {
         await axios.put(`http://localhost:5000/api/rupdate/${id}`, record)
             .then((response) => {
                 toast.success(response.data.msg, { position: "top-right" });
-                navigate("/recordshow");
+                navigate(`/admin/reports/scan/recordshow/${id}`);
             }).catch(error => console.log(error));
     };
 

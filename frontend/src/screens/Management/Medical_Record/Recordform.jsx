@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../../styles/Record.css";
+
 const Addrecords = () => {
     const initialRecordState = {
         fullName: "",
@@ -37,6 +38,15 @@ const Addrecords = () => {
 
     const [record, setRecord] = useState(initialRecordState);
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const userId = queryParams.get("patientId"); // Get the patientId from the URL
+    const [patients, setPatients] = useState([]);
+    const [selectedPatient, setSelectedPatient] = useState("");
+
+    useEffect(() => {
+        axios.get("/api/users/patients").then(res => setPatients(res.data));
+    }, []);
 
     const inputChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -49,36 +59,58 @@ const Addrecords = () => {
     const submitForm = async (e) => {
         e.preventDefault();
         
-        // Assuming you have the user ID available, e.g., from a user context or state
-        const userId = "user_id_here"; // Replace this with the actual user ID
-    
-        // Add the user ID to the record object
-        const recordWithUserId = { ...record, user: userId }; // Spread the existing record and add the user ID
-    
-        console.log(recordWithUserId);  // Check the data structure here
-        
+        // Use patientId from URL or selectedPatient from dropdown
+        const patientForRecord = userId || selectedPatient;
+        if (!patientForRecord) {
+            alert("Please select a patient.");
+            return;
+        }
+
+        // Validate required fields
+        if (!record.dob || !record.gender || !record.contactNumber) {
+            alert("Please fill in all required fields: Date of Birth, Gender, and Contact Number");
+            return;
+        }
+
+        const recordWithUserId = { ...record, user: patientForRecord };
+
         try {
             const response = await axios.post("http://localhost:5000/api/rcreate", recordWithUserId);
             alert(response.data.msg);
-            navigate("/recordshow"); // Adjust the route according to your setup
+            navigate(`/admin/reports/scan/recordshow?patientId=${patientForRecord}`);
         } catch (error) {
             console.error("Error details:", error.response ? error.response.data : error.message);
             alert("Error creating record: " + (error.response?.data?.msg || error.message));
         }
     };
 
-    
-
-    
-
     return (
         <Container className='addRecord'>
-            <Link to="/recordshow">
+            <Link to="/managementdashboard/reports">
                 <Button variant="secondary" className="mb-3">Back</Button>
             </Link>
 
             <h3>Demographic Information</h3>
             <Form className="addRecordForm" onSubmit={submitForm}>
+                {/* Patient selection dropdown if no patientId in URL */}
+                {!userId && (
+                  <Form.Group controlId="patient">
+                    <Form.Label>Patient</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={selectedPatient}
+                      onChange={e => setSelectedPatient(e.target.value)}
+                    >
+                      <option value="">Select Patient</option>
+                      {patients.map(patient => (
+                        <option key={patient._id} value={patient._id}>
+                          {patient.name} ({patient.email})
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                )}
+
                 <Row>
                     <Col md={6}>
                         <Form.Group controlId="fullName">
@@ -161,12 +193,13 @@ const Addrecords = () => {
                         <Form.Group controlId="contactNumber">
                             <Form.Label>Contact Number</Form.Label>
                             <Form.Control 
-                                type="number" 
+                                type="text" 
                                 onChange={inputChangeHandler} 
                                 name="contactNumber" 
                                 placeholder="Enter contact number" 
                                 value={record.contactNumber} 
                                 autoComplete="off"
+                                required
                             />
                         </Form.Group>
                     </Col>
@@ -475,13 +508,15 @@ const Addrecords = () => {
                                 type="text" 
                                 onChange={inputChangeHandler} 
                                 name="prescribingDoctor" 
-                                placeholder="Enter prescribing doctor’s name" 
+                                placeholder="Enter prescribing doctor's name" 
                                 value={record.prescribingDoctor} 
                                 autoComplete="off"
                             />
                         </Form.Group>
                     </Col>
                 </Row>
+
+                
 
                 <Button variant="primary" type="submit">
                     Submit

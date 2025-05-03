@@ -1,4 +1,3 @@
-
 import Record from "../models/RecordModel.js";
 
 // @desc    Create or update the patient record
@@ -86,6 +85,18 @@ export const rdelete = async (req, res) => {
     res.status(200).json({ msg: "Record deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error });
+  }
+};
+
+// @desc    Get all records with patient info
+// @route   GET /api/records-with-patient
+// @access  Private/Admin
+export const getAllRecordsWithPatient = async (req, res) => {
+  try {
+    const records = await Record.find().populate('user', 'name email role');
+    res.json(records);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
