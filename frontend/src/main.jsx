@@ -81,6 +81,7 @@ const router = createBrowserRouter(
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/paymentreceipt" element={<PaymentReceiptScreen />} />
         <Route path="/pendingapproval" element={<PendingApprovalScreen />} />
+        <Route path="/pending-approval" element={<PendingApprovalScreen />} />
         <Route path="/mypayments" element={<MyPaymentsScreen />} />
         <Route path="/receipt/:paymentId" element={<ReceiptScreen />} />
       </Route>

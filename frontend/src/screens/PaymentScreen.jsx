@@ -12,7 +12,7 @@ const PaymentScreen = () => {
   // const [amount, setAmount] = useState("");
 
   const location = useLocation();
-  const { amount } = location.state || { amount: 0 };
+  const { amount, doctor, appointmentId } = location.state || { amount: 0, doctor: "", appointmentId: "" };
 
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
@@ -88,11 +88,14 @@ const PaymentScreen = () => {
         );
 
         // Navigate to pending approval screen
-        navigate("/pendingapproval", {
+        navigate("/pending-approval", {
           state: {
             paymentDetails: {
               method: paymentData.method,
               amount: paymentData.amount,
+              date: new Date().toLocaleDateString(),
+              doctor: doctor,
+              appointmentId: appointmentId,
             },
           },
         });

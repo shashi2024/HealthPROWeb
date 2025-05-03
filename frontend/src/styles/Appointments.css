@@ -15,3 +15,95 @@
 .sub_btn:hover{
     background-color: #167d7f !important;
 }
+
+.AdminDashboard {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.form-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.payment-details {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+.status-message {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.btn-primary:disabled {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* Font Awesome icons spacing */
+.fa {
+  margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  .payment-details, .status-message {
+    padding: 15px;
+  }
+}

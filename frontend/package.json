@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-google-maps/api": "^2.20.2",
+    "@react-pdf/renderer": "^4.3.0",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.7.7",
     "azure-maps-control": "^3.6.1",
@@ -44,8 +45,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-
     "vite": "^4.5.14"
-
   }
 }
