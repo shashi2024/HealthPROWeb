@@ -20,15 +20,51 @@ const AddDoctor = () => {
     experience: "",
   });
 
+  const [errors, setErrors] = useState({
+    doctorname: "",
+  });
+
   const navigate = useNavigate(); // Initialize useNavigate
+
+  const validateDoctorName = (name) => {
+    // Regular expression to match only letters, spaces, and dots
+    const nameRegex = /^[A-Za-z\s.]+$/;
+    
+    if (!name) {
+      return "Doctor name is required";
+    }
+    if (!nameRegex.test(name)) {
+      return "Doctor name should only contain letters, spaces, and dots";
+    }
+    if (name.length < 3) {
+      return "Doctor name should be at least 3 characters long";
+    }
+    if (name.length > 50) {
+      return "Doctor name should not exceed 50 characters";
+    }
+    return "";
+  };
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
     setDoctor({ ...doctor, [name]: value });
+    
+    // Validate doctor name when it changes
+    if (name === "doctorname") {
+      setErrors({ ...errors, doctorname: validateDoctorName(value) });
+    }
   };
 
   const handleFinish = async (e) => {
     e.preventDefault();
+
+    // Validate doctor name before submission
+    const nameError = validateDoctorName(doctor.doctorname);
+    if (nameError) {
+      setErrors({ ...errors, doctorname: nameError });
+      toast.error(nameError, { position: "top-right" });
+      return;
+    }
 
     try {
       const response = await axios.post("http://localhost:3000/api/doctor/dcreate", doctor);
@@ -80,7 +116,12 @@ const AddDoctor = () => {
                           value={doctor.doctorname}
                           onChange={inputHandler}
                           required
+                          isInvalid={!!errors.doctorname}
+                          
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.doctorname}
+                        </Form.Control.Feedback>
                       </Form.Group>
                     </Col>
                     <Col md={6}>

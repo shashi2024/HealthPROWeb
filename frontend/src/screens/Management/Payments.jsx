@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Payments.css";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const Payments = ({ setTotalPayments, setTotalAmount }) => {
   const [payments, setPayments] = useState([]);
@@ -61,6 +63,82 @@ const Payments = ({ setTotalPayments, setTotalAmount }) => {
     }
   };
 
+  const generateReport = () => {
+    try {
+      console.log('Starting PDF generation...');
+      console.log('Payments data:', payments);
+
+      // Create a new PDF document
+      const doc = new jsPDF();
+
+      // Add title
+      doc.setFontSize(16);
+      doc.text("Payments Report", 14, 15);
+
+      // Prepare data for the table
+      const tableData = payments.map(payment => {
+        console.log('Processing payment:', payment);
+        return [
+          payment.user || 'N/A',
+          payment.amount || 'N/A',
+          payment.method || 'N/A',
+          payment.status || 'N/A'
+        ];
+      });
+
+      console.log('Table data prepared:', tableData);
+
+      // Add the table using autoTable function
+      autoTable(doc, {
+        head: [['ID', 'Amount', 'Method', 'Status']],
+        body: tableData,
+        startY: 25,
+        theme: 'grid',
+        headStyles: {
+          fillColor: [34, 191, 194],
+          textColor: 255,
+          fontSize: 10,
+          fontStyle: 'bold'
+        },
+        styles: {
+          fontSize: 9,
+          cellPadding: 3
+        },
+        didDrawPage: function(data) {
+          // Add page number
+          const pageCount = doc.internal.getNumberOfPages();
+          doc.setFontSize(10);
+          doc.text('Page ' + data.pageNumber + ' of ' + pageCount, data.settings.margin.left, doc.internal.pageSize.height - 10);
+        }
+      });
+
+      console.log('Table added to PDF');
+
+      // Save the PDF
+      const pdfBlob = doc.output('blob');
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      
+      // Create a temporary link and trigger download
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = 'payments_report.pdf';
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(pdfUrl);
+      }, 100);
+
+      console.log('PDF download initiated');
+    } catch (error) {
+      console.error('Detailed error:', error);
+      console.error('Error stack:', error.stack);
+      alert(`Error generating PDF report: ${error.message}\nPlease check the console for more details.`);
+    }
+  };
+
   return (
     <Container fluid className="AdminDashboard">
       <Row>
@@ -69,7 +147,16 @@ const Payments = ({ setTotalPayments, setTotalAmount }) => {
         </Col>
         <Col md={9}>
           <div className="patient_list">
-            <h2>All Payments</h2>
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <h2>All Payments</h2>
+              <Button 
+                variant="success" 
+                onClick={generateReport}
+                className="generate-report-btn"
+              >
+                Generate Report
+              </Button>
+            </div>
             <Table striped bordered hover responsive="sm" className="mt-4 form">
               <thead>
                 <tr>

@@ -1,3 +1,18 @@
 .form thead th{
     background-color: #22bfc2;
 }
+
+.generate-report-btn {
+  background-color: #28a745;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.generate-report-btn:hover {
+  background-color: #218838;
+  color: white;
+}
