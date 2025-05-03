@@ -214,9 +214,12 @@ export const appointmentdelete = async (req, res) => {
 
 // Get doctors by specialization
 export const getDoctorsBySpecialization = async (req, res) => {
-  const { specialization } = req.params;
+  const { specialization, hospitalName } = req.params;
   try {
-    const doctors = await Doctor.find({ specialization });
+    const doctors = await Doctor.find({ 
+      specialization,
+      hospitalName 
+    });
     res.status(200).json(doctors);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -9,6 +9,7 @@ import {
   getDeletedAppointments,getDeletedAppointmentsPatient,
   getRecentAppointmentsForHeatmap
 } from '../controllers/appointmentController.js';
+import Doctor from '../models/doctorModel.js';
 
 const router = express.Router();
 
@@ -42,6 +43,16 @@ router.get('/doctor/:doctorname', getDoctorByName);
 
 // routes/appointmentRoutes.js
 router.get('/heatmap', getRecentAppointmentsForHeatmap);
+
+// Route to get all doctors (for debugging)
+router.get('/doctors', async (req, res) => {
+  try {
+    const doctors = await Doctor.find();
+    res.status(200).json(doctors);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 
