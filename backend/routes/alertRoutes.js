@@ -22,4 +22,23 @@ router.get('/allfromdb', getAllAlertsdb);
 router.delete('/group/:key', deleteAlertGroup);
 router.put('/:id/update', updateAlert);
 
+router.put('/alerts/:id/important', async (req, res) => {
+  const { id } = req.params;
+  const { isImportant } = req.body;
+
+  try {
+    const updatedAlert = await Alert.findByIdAndUpdate(
+      id,
+      { important: isImportant },
+      { new: true }
+    );
+
+    if (!updatedAlert) return res.status(404).json({ error: "Alert not found." });
+
+    res.json(updatedAlert);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update alert." });
+  }
+});
+
 export default router;
