@@ -4,19 +4,6 @@ import Doctor from '../models/doctorModel.js';
 import DeletedAppointment from '../models/deletedAppointmentModel.js';
 import { geocodeAddress } from "../utils/geocodeAddress.js"; // Import the DeletedAppointment model
 
-// Create appointment
-// export const createAppointment = async (req, res) => {
-//   try {
-//     console.log("Received appointment data:", req.body);
-//     const appointmentData = new Appointment(req.body);
-//     await appointmentData.save();
-//     res.status(201).json({ msg: "Appointment created successfully" });
-//   } 
-//   catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
-
 export const createAppointment = async (req, res) => {
   try {
     const { address } = req.body;
@@ -148,6 +135,8 @@ export const getRecentAppointmentsForHeatmap = async (req, res) => {
     const clusterMap = new Map();
 
     appointments.forEach(app => {
+      if (!app.symptoms || app.symptoms.length < 3) return;
+
       const area = app.address.trim().toLowerCase();
       const symptomsKey = app.symptoms.sort().join(',').toLowerCase();
       const clusterKey = `${area}::${symptomsKey}`;

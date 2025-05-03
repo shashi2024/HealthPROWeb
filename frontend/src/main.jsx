@@ -56,7 +56,6 @@ import UpdatePatient from "./screens/Management/Patients/updatePatient.jsx";
 import UpdatePayment from "./screens/Management/payment/UpdatePayment.jsx";
 import Pandemic from "./screens/Pandemicmap.jsx";
 import AlertList from "./screens/Management/Alerts/AlertList.jsx";
-import AlertDetails from "./screens/Management/Alerts/AlertDetails.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -126,10 +125,7 @@ const router = createBrowserRouter(
         />
         <Route path="/managementdashboard/emergency" element={<Emergency />} />
         <Route path="/managementdashboard/reports" element={<Reports />} />
-        {/* <Route path="/managementdashboard/alerts" element={<Alerts />} /> */}
-        {/* <Route path="/managementdashboard/alerts" element={<Alerts />} /> */}
         <Route path="/managementdashboard/pandemicAlerts" element={<AlertList />} />
-        <Route path="/managementdashboard/alertsDetails/:id" element={<AlertDetails />} />
         <Route path="/admin/reports/scan" element={<Scan />} />
         <Route
           path="/admin/reports/scan/record-form"
