@@ -19,26 +19,56 @@ const AlertList = () => {
   const [pandemicDetected, setPandemicDetected] = useState(false);
   const [pandemicTimestamp, setPandemicTimestamp] = useState(null);
 
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/alerts/generate")
+  //     .catch((err) => console.error(err))
+  //     .then((res) => {
+  //       console.log("Fetched alerts:", res.data);
+  //       setAlerts(res.data);
+
+  //       // Check if any alert contains "pandemic" in symptoms
+  //       const foundPandemic = res.data.some((alert) =>
+  //         alert.symptoms.some((symptom) =>
+  //           symptom.toLowerCase().includes("pandemic")
+  //         )
+  //       );
+
+  //       if (foundPandemic && !localStorage.getItem("pandemicAlertShown")) {
+  //         setPandemicTimestamp(Date.now());
+  //         localStorage.setItem("pandemicAlertShown", "true");
+  //       }
+        
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, []);
+
   useEffect(() => {
     axios
       .get("/api/alerts/generate")
       .catch((err) => console.error(err))
       .then((res) => {
-        console.log("Fetched alerts:", res.data);
-        setAlerts(res.data);
-
+        if (!res?.data) return;
+  
+        // Sort alerts by timestamp DESCENDING (newest first)
+        const sortedAlerts = res.data.sort(
+          (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+        );
+  
+        console.log("Fetched alerts:", sortedAlerts);
+        setAlerts(sortedAlerts);
+  
         // Check if any alert contains "pandemic" in symptoms
-        const foundPandemic = res.data.some((alert) =>
+        const foundPandemic = sortedAlerts.some((alert) =>
           alert.symptoms.some((symptom) =>
             symptom.toLowerCase().includes("pandemic")
           )
         );
-
+  
         if (foundPandemic && !localStorage.getItem("pandemicAlertShown")) {
           setPandemicTimestamp(Date.now());
           localStorage.setItem("pandemicAlertShown", "true");
         }
-        
       })
       .catch((err) => console.error(err));
   }, []);
@@ -82,12 +112,25 @@ const AlertList = () => {
     setCompletedAlerts((prev) => ({ ...prev, [id]: true }));
   };
 
-  const handleMarkImportant1 = (id) => {
-    setImportantAlerts((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  const handleMarkImportant1 = async (id) => {
+    const newStatus = !importantAlerts[id];
+  
+    try {
+      await axios.put(`/api/alerts/${id}/important`, {
+        isImportant: newStatus,
+      });
+  
+      setImportantAlerts((prev) => ({
+        ...prev,
+        [id]: newStatus,
+      }));
+      toast.success(`Marked as ${newStatus ? "Important" : "Not Important"}`);
+    } catch (err) {
+      console.error("Failed to update important status:", err);
+      toast.error("Error updating important status.");
+    }
   };
+  
 
   const handleMarkImportant2 = (id) => {
     setImportantAlerts((prev) => ({
@@ -153,7 +196,7 @@ const AlertList = () => {
           return (
             <div key={key} className="alert-section">
               <div className="alert-header" onClick={() => toggleSection(key)}>
-                <button
+                {/* <button
                   className={`icon-btn ${
                     importantAlerts[firstAlert._id] ? "important" : ""
                   }`}
@@ -182,7 +225,7 @@ const AlertList = () => {
                   >
                     <path d="M2 2v13.5l6-3.5 6 3.5V2z" />
                   </svg>
-                </button>
+                </button> */}
 
                 <span className="location">{firstAlert.location}</span>
                 <span className="symptoms">
