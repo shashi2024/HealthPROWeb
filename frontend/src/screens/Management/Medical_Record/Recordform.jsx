@@ -72,6 +72,23 @@ const Addrecords = () => {
             return;
         }
 
+        const nameRegex = /^[A-Za-z\s]+$/;
+        if (!nameRegex.test(record.fullName)) {
+            alert("Full Name should only contain letters and spaces.");
+            return;
+        }
+
+        const contactNumberRegex = /^\d{10}$/;
+        if (!contactNumberRegex.test(record.contactNumber)) {
+            alert("Contact Number should be exactly 10 digits.");
+            return;
+        }
+
+        if (!record.email.includes("@")) {
+            alert("Please enter a valid email address containing '@'.");
+            return;
+        }
+
         const recordWithUserId = { ...record, user: patientForRecord };
 
         try {
@@ -122,6 +139,11 @@ const Addrecords = () => {
                                 placeholder="Enter full name" 
                                 value={record.fullName} 
                                 autoComplete="off"
+                                onKeyPress={e => {
+                                    if (!/[A-Za-z\s]/.test(e.key)) {
+                                        e.preventDefault();
+                                    }
+                                }}
                             />
                         </Form.Group>
                     </Col>
@@ -200,6 +222,10 @@ const Addrecords = () => {
                                 value={record.contactNumber} 
                                 autoComplete="off"
                                 required
+                                maxLength={10}
+                                onInput={e => {
+                                    e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
+                                }}
                             />
                         </Form.Group>
                     </Col>
