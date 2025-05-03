@@ -6,6 +6,9 @@ import { FaBookmark } from "react-icons/fa";
 import AdminDashboardSideNavbar from "../../../components/AdminDashboardSideNavbar";
 import { Col } from "react-bootstrap";
 import PandemicAlertPopup from "./PandemicAlertPopup"; // adjust path if different
+import { toast } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AlertList = () => {
   const [alerts, setAlerts] = useState([]);
@@ -14,6 +17,7 @@ const AlertList = () => {
   const [importantAlerts, setImportantAlerts] = useState({});
   const navigate = useNavigate();
   const [pandemicDetected, setPandemicDetected] = useState(false);
+  const [pandemicTimestamp, setPandemicTimestamp] = useState(null);
 
   useEffect(() => {
     axios
@@ -30,15 +34,29 @@ const AlertList = () => {
           )
         );
 
-        if (foundPandemic) {
-          setPandemicDetected(false); // reset first
-          setTimeout(() => setPandemicDetected(true), 100);
+        if (foundPandemic && !localStorage.getItem("pandemicAlertShown")) {
+          setPandemicTimestamp(Date.now());
+          localStorage.setItem("pandemicAlertShown", "true");
         }
         
       })
       .catch((err) => console.error(err));
   }, []);
 
+  useEffect(() => {
+    if (pandemicTimestamp) {
+      toast.error("🚨 Pandemic detected, please stay safe!", {
+        position: "top-right",
+        autoClose: 8000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [pandemicTimestamp]);
+  // This will run whenever pandemicDetected state changes to true
   
   // Group alerts by "location (symptoms)"
   const groupedAlerts = alerts.reduce((acc, alert) => {
@@ -78,37 +96,44 @@ const AlertList = () => {
     }));
   };
 
-  // const toggleImportant = (id) => {
-  //   setImportantAlerts((prev) => ({
-  //     ...prev,
-  //     [id]: !prev[id],
-  //   }));
-  // };
-
-  const handleDeleteGroup = (key) => {
+  const handleDeleteGroup = async (key) => {
     const currentTime = Date.now();
-
+  
     // Check if ALL alerts in that group are older than 1 hour
     const alertsInGroup = alerts.filter((alert) => {
       const groupKey = `${alert.location} (${alert.symptoms.join(", ")})`;
       return groupKey === key;
     });
-
+  
     const canDelete = alertsInGroup.every((alert) => {
       const alertTime = new Date(alert.timestamp).getTime();
       return currentTime - alertTime >= 3600 * 1000; // 1 hour = 3600 sec * 1000 ms
     });
-
+  
     if (canDelete) {
-      const updatedAlerts = alerts.filter((alert) => {
-        const groupKey = `${alert.location} (${alert.symptoms.join(", ")})`;
-        return groupKey !== key;
-      });
-      setAlerts(updatedAlerts);
+      try {
+        const response = await fetch(`/api/alerts/group/${encodeURIComponent(key)}`, {
+          method: "DELETE"
+        });
+  
+        if (response.ok) {
+          const updatedAlerts = alerts.filter((alert) => {
+            const groupKey = `${alert.location} (${alert.symptoms.join(", ")})`;
+            return groupKey !== key;
+          });
+          setAlerts(updatedAlerts);
+        } else {
+          alert("Failed to delete alerts from server.");
+        }
+      } catch (error) {
+        console.error("Error deleting alerts:", error);
+        alert("An error occurred while deleting alerts.");
+      }
     } else {
       alert("You can only delete alerts that are older than 1 hour.");
     }
   };
+  
 
   return (
     <>
@@ -119,6 +144,8 @@ const AlertList = () => {
       <Col md={3}>
         <AdminDashboardSideNavbar /> {/* Side navbar component */}
       </Col>
+
+      <ToastContainer position="top-right" autoClose={10000} />
 
       <div className="alert-list">
         {Object.entries(groupedAlerts).map(([key, group]) => {
@@ -182,13 +209,13 @@ const AlertList = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {group.map((alert) => (
-                        <tr key={alert._id}>
-                          <td>{alert.patientName}</td>
-                          <td>{alert.ageGroup}</td>
-                          <td>{alert.gender}</td>
-                          <td>{alert.hospital}</td>
-                          <td>{alert.contactNumber}</td>
+                      {group.map((newalerts) => (
+                        <tr key={newalerts._id}>
+                          <td>{newalerts.patientName}</td>
+                          <td>{newalerts.ageGroup}</td>
+                          <td>{newalerts.gender}</td>
+                          <td>{newalerts.hospital}</td>
+                          <td>{newalerts.contactNumber}</td>
                         </tr>
                       ))}
                     </tbody>

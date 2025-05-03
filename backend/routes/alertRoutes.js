@@ -3,6 +3,9 @@ import {
   generateAlert,
   getAllAlerts,
   getAlertById,
+  getAllAlertsdb, 
+  deleteAlertGroup, 
+  updateAlert
 } from '../controllers/alertController.js';
 
 import { getPandemicAlerts } from '../controllers/appointmentController.js';
@@ -15,6 +18,8 @@ router.get('/:id', getAlertById);           // /api/alerts/:id
 
 router.get('/pandemic', getPandemicAlerts); // 👈 route: /api/alerts/pandemic
 
-
+router.get('/allfromdb', getAllAlertsdb);
+router.delete('/group/:key', deleteAlertGroup);
+router.put('/:id/update', updateAlert);
 
 export default router;

@@ -137,8 +137,53 @@ const getAlertById = async (req, res) => {
       res.status(500).json({ message: "Server Error: Unable to fetch alert" });
     }
   };
+
+  // Get all alerts
+const getAllAlertsdb = async (req, res) => {
+  try {
+    const alerts = await Alert.find();
+    res.status(200).json(alerts);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch alerts", error });
+  }
+};
+
+// Delete alert by ID
+const deleteAlertGroup = async (req, res) => {
+  const groupKey = decodeURIComponent(req.params.key);
+
+  try {
+    const [location, symptomStr] = groupKey.split(" (");
+    const symptoms = symptomStr.replace(")", "").split(",").map(s => s.trim());
+
+    const result = await Alert.deleteMany({
+      location,
+      symptoms: { $all: symptoms, $size: symptoms.length }
+    });
+
+    res.status(200).json({ message: `${result.deletedCount} alerts deleted.` });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete alerts", error });
+  }
+};
+
+// Update alert by ID
+const updateAlert = async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  try {
+    const updatedAlert = await Alert.findByIdAndUpdate(id, updates, { new: true, runValidators: true });
+    if (!updatedAlert) {
+      return res.status(404).json({ message: "Alert not found" });
+    }
+    res.status(200).json(updatedAlert);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update alert", error });
+  }
+};
   
 
-export { generateAlert, getAllAlerts, getAlertById};
+export { generateAlert, getAllAlerts, getAlertById, getAllAlertsdb, deleteAlertGroup, updateAlert};
 
 
