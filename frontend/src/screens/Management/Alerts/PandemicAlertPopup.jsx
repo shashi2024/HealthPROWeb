@@ -1,6 +1,6 @@
 import React from "react";
 import "../../../styles/PandemicAlertPopup.css"; // external CSS for styles
-import alert from "../../../images/Alert.jpg";
+import alert from "../../../images/Alert.jpg"; // path to the alert image
 
 function PandemicAlertPopup({ show, onClose }) {
   if (!show) return null;

@@ -20,6 +20,7 @@ const AlertList = () => {
       .get("/api/alerts/generate")
       .catch((err) => console.error(err))
       .then((res) => {
+        console.log("Fetched alerts:", res.data);
         setAlerts(res.data);
 
         // Check if any alert contains "pandemic" in symptoms
@@ -30,12 +31,15 @@ const AlertList = () => {
         );
 
         if (foundPandemic) {
-          setPandemicDetected(true);
+          setPandemicDetected(false); // reset first
+          setTimeout(() => setPandemicDetected(true), 100);
         }
+        
       })
       .catch((err) => console.error(err));
   }, []);
 
+  
   // Group alerts by "location (symptoms)"
   const groupedAlerts = alerts.reduce((acc, alert) => {
     const key = `${alert.location} (${alert.symptoms.join(", ")})`;
@@ -74,12 +78,12 @@ const AlertList = () => {
     }));
   };
 
-  const toggleImportant = (id) => {
-    setImportantAlerts((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
+  // const toggleImportant = (id) => {
+  //   setImportantAlerts((prev) => ({
+  //     ...prev,
+  //     [id]: !prev[id],
+  //   }));
+  // };
 
   const handleDeleteGroup = (key) => {
     const currentTime = Date.now();
@@ -108,13 +112,13 @@ const AlertList = () => {
 
   return (
     <>
-      <Col md={3}>
-        <AdminDashboardSideNavbar /> {/* Side navbar component */}
-      </Col>
       <PandemicAlertPopup
         show={pandemicDetected}
         onClose={() => setPandemicDetected(false)}
       />
+      <Col md={3}>
+        <AdminDashboardSideNavbar /> {/* Side navbar component */}
+      </Col>
 
       <div className="alert-list">
         {Object.entries(groupedAlerts).map(([key, group]) => {
